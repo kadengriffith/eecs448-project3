@@ -42,6 +42,7 @@ let createScene = function () {
   // Scene Creation
   let scene = new BABYLON.Scene(engine);
   scene.clearColor = new BABYLON.Color3(240, 240, 240);
+  // Information for the physics engine
   let gravityVector = new BABYLON.Vector3(0,-9.81, 0);
   let physicsPlugin = new BABYLON.CannonJSPlugin();
   // This creates a light, aiming 0,1,0 - to the sky
@@ -51,28 +52,24 @@ let createScene = function () {
   let ground = BABYLON.Mesh.CreateBox("ground", ground_length, scene);
   ground.position.y = -5;
   ground.scaling.y = 0.1;
-  ground.checkCollisions = true;
   // This creates the puck
   let Puck = BABYLON.Mesh.CreateCylinder("puck", puck_height, puck_diameter, puck_diameter, puck_polygons, 1, scene);
   Puck.position = new BABYLON.Vector3(0, puck_yoff + 10, 0);
   let puck_material = new BABYLON.StandardMaterial("green", scene);
   puck_material.diffuseColor = new BABYLON.Color3(0.5, 1.0, 0.5);
   Puck.material = puck_material;
-  Puck.checkCollisions = true;
   // This creates the controlled object
   let Player1 = BABYLON.Mesh.CreateCylinder("player1", player_height, player_diameter, player_diameter, player_polygons, 1, scene);
   Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
   let Player1_material = new BABYLON.StandardMaterial("red", scene);
   Player1_material.diffuseColor = new BABYLON.Color3(1.0, 0, 0);
   Player1.material = Player1_material;
-  Player1.checkCollisions = true;
   // This creates the opposing player
   let AI = BABYLON.Mesh.CreateCylinder("AI", player_height, player_diameter, player_diameter, player_polygons, 1, scene);
   AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
   let AI_material = new BABYLON.StandardMaterial("blue", scene);
   AI_material.diffuseColor = new BABYLON.Color3(0, 0, 1.0);
   AI.material = AI_material;
-  AI.checkCollisions = true;
   // This creates and positions a follow camera
   let camera = new BABYLON.FollowCamera("FollowCam", Player1.position, scene);
   camera.checkCollisions = true;
@@ -85,7 +82,7 @@ let createScene = function () {
   AI.physicsImpostor = new BABYLON.PhysicsImpostor(AI, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 1000, friction: 0.5, restitution: 0.1 }, scene);
   Puck.physicsImpostor = new BABYLON.PhysicsImpostor(Puck, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 2, friction: 0.001, restitution: 0.1 }, scene);
   ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.2 }, scene);
-  /*
+  /* This is a function that is called on collision but I couldn't get it to work just yet
   Player1.physicsImpostor.registerOnPhysicsCollide(Puck.physicsImpostor, function(main, collided) {
     collided.setLinearVelocity(new BABYLON.Vector3(0, 0, player_speed));
   });
@@ -96,21 +93,20 @@ let createScene = function () {
 // @END SCENE OBJECT INSTANTIATION
 let scene = createScene();
 // UPDATE LOOP
-// Register a render loop to repeatedly render the scene
 engine.runRenderLoop(function () {
-  // Check keys
+  // Register a render loop to repeatedly render the scene
   let player = scene.meshes[2];
   let ai = scene.meshes[3];
   let puck = scene.meshes[1];
-
+  // Easy in-game reset for debugging
   if(player.position.y < -20 || ai.position.y < -20) { window.location.reload(); }
-
+  // There is a bug that prevents the imposter velocity from resetting on re-drop
   if(puck.position.y < -20) {
     puck.position.x = 0;
     puck.position.y = 10;
     puck.position.z = 0;
   }
-
+  // Check keys
   if (key_D == true) {
     if(player.position.x > (-ground_length / 3) + (player_diameter / 2)){
       player.position.x -= player_speed;
