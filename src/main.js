@@ -38,6 +38,10 @@ let engine = new BABYLON.Engine(game, true);
 // let hud_ctx = hud.getContext("2d"); USE THIS LATER
 // @END CONTEXT & ENGINE
 // SCENE OBJECT INSTANTIATION
+
+var Puck; //declare puck in higher scope so its velocity can be manipulated in other functions
+
+
 let createScene = function () {
   // Scene Creation
   let scene = new BABYLON.Scene(engine);
@@ -53,7 +57,7 @@ let createScene = function () {
   ground.position.y = -5;
   ground.scaling.y = 0.1;
   // This creates the puck
-  let Puck = BABYLON.Mesh.CreateCylinder("puck", puck_height, puck_diameter, puck_diameter, puck_polygons, 1, scene);
+  Puck = BABYLON.Mesh.CreateCylinder("puck", puck_height, puck_diameter, puck_diameter, puck_polygons, 1, scene);
   Puck.position = new BABYLON.Vector3(0, puck_yoff + 10, 0);
   let puck_material = new BABYLON.StandardMaterial("green", scene);
   puck_material.diffuseColor = new BABYLON.Color3(0.5, 1.0, 0.5);
@@ -100,10 +104,11 @@ engine.runRenderLoop(function () {
   let puck = scene.meshes[1];
   // Easy in-game reset for debugging
   if(player.position.y < -20 || ai.position.y < -20) { window.location.reload(); }
-  // There is a bug that prevents the imposter velocity from resetting on re-drop
+  
   if(puck.position.y < -20) {
-    puck.position.x = 0;
-    puck.position.y = 10;
+    Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); //stop puck
+	puck.position.x = 0;
+    puck.position.y = 10; //replace puck  /////MAYBE CONSIDER USING WINDOW.LOCATION.RELOAD() SO PLAYER AND AI ARE ALSO RESET IF PUCK GOES OFF TABLE
     puck.position.z = 0;
   }
   // Check keys
