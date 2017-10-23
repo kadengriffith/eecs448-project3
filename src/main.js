@@ -246,7 +246,11 @@ engine.runRenderLoop(function () {
   }
 
   if(Puck.position.z < 0) {
-    AI.position.z += player_speed * .8;
+    if(Puck.position.z < AI.position.z) {
+      AI.position.z -= player_speed * 1.6;
+    } else {
+      AI.position.z += player_speed * .8;
+    }
   } else if(Puck.position.z > -37){
     AI.position.z -= player_speed * .8;
   }
