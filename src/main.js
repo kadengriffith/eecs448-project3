@@ -198,7 +198,7 @@ let createScene = function () {
   Puck.physicsImpostor = new BABYLON.PhysicsImpostor(Puck, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: puck_mass, friction: puck_friction, restitution: puck_restitution }, scene);
   /* This is a function that is called on collision but I couldn't get it to work just yet
   Player1.physicsImpostor.registerOnPhysicsCollide(Puck.physicsImpostor, function(main, collided) {
-    collided.setLinearVelocity(new BABYLON.Vector3(0, 0, player_speed));
+    main.setLinearVelocity(new BABYLON.Vector3(0, 0, 0));
   });
   */
   // End of createScene function
