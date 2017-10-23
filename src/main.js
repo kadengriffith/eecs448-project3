@@ -27,17 +27,20 @@ let ground_length = 80;
 let ground_restitution = 1;
 let ground_yoff = -0.5;
 
-let playarea_height = 20;
+let playarea_height = 25;
 let playarea_yoff = -0.5;
 let playarea_restitution = 1;
-let showPlayArea = true;
+let showPlayArea = false;
 
-let goal_height = 0.2;
-let goal_width = ground_length / 4;
+let goal_height = 0.16;
+let goal_width = ground_length / 3;
 
 let Puck;
 let Player1;
 let AI;
+
+let score_blue = 0;
+let score_red = 0;
 
  // MOVEMENT
   // Keys to check in-game
@@ -118,8 +121,8 @@ let createScene = function () {
   let S3 = BABYLON.MeshBuilder.CreatePlane("side3", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
   S3.position.z = (-ground_length / 2);
   S3.position.y = playarea_yoff + (playarea_height / 2);
-  S3.position.x = ground_length / 2 - goal_width / 2;
-  S3.scaling = new BABYLON.Vector3(ground_length / 2.2,  playarea_height, 0);
+  S3.position.x = goal_width;
+  S3.scaling = new BABYLON.Vector3(goal_width,  playarea_height, 0);
   // Use this to view the boundaries
   if(showPlayArea) { S3.visibility = 0.5; S3.showBoundingBox = true; } else { S3.visibility = 0; }
   let S3_material = new BABYLON.StandardMaterial("white", scene);
@@ -128,8 +131,8 @@ let createScene = function () {
   let S4 = BABYLON.MeshBuilder.CreatePlane("side4", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
   S4.position.z = ground_length / 2;
   S4.position.y = playarea_yoff + (playarea_height / 2);
-  S4.position.x = ground_length / 2 - goal_width / 2;
-  S4.scaling = new BABYLON.Vector3(ground_length / 2.2,  playarea_height, 0);
+  S4.position.x = goal_width;
+  S4.scaling = new BABYLON.Vector3(goal_width,  playarea_height, 0);
   // Use this to view the boundaries
   if(showPlayArea) { S4.visibility = 0.5; S4.showBoundingBox = true; } else { S4.visibility = 0; }
   let S4_material = new BABYLON.StandardMaterial("white", scene);
@@ -138,7 +141,7 @@ let createScene = function () {
   let S5 = BABYLON.MeshBuilder.CreatePlane("side5", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
   S5.position.z = (-ground_length / 2);
   S5.position.y = goal_height + (playarea_height / 2);
-  S5.scaling = new BABYLON.Vector3(2 * (ground_length / 3), playarea_height - goal_height, 0);
+  S5.scaling = new BABYLON.Vector3(goal_width, playarea_height - goal_height, 0);
   // Use this to view the boundaries
   if(showPlayArea) { S5.visibility = 0.5; S5.showBoundingBox = true; } else { S5.visibility = 0; }
   let S5_material = new BABYLON.StandardMaterial("white", scene);
@@ -147,7 +150,7 @@ let createScene = function () {
   let S6 = BABYLON.MeshBuilder.CreatePlane("side6", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
   S6.position.z = ground_length / 2;
   S6.position.y = goal_height + (playarea_height / 2);
-  S6.scaling = new BABYLON.Vector3(2 * (ground_length / 3), playarea_height - goal_height, 0);
+  S6.scaling = new BABYLON.Vector3(goal_width, playarea_height - goal_height, 0);
   // Use this to view the boundaries
   if(showPlayArea) { S6.visibility = 0.5; S6.showBoundingBox = true; } else { S6.visibility = 0; }
   let S6_material = new BABYLON.StandardMaterial("white", scene);
@@ -156,22 +159,50 @@ let createScene = function () {
   let S7 = BABYLON.MeshBuilder.CreatePlane("side7", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
   S7.position.z = (-ground_length / 2);
   S7.position.y = playarea_yoff + (playarea_height / 2);
-  S7.position.x = -(ground_length / 2 - goal_width / 2);
-  S7.scaling = new BABYLON.Vector3(ground_length / 2.2,  playarea_height, 0);
+  S7.position.x = -(goal_width);
+  S7.scaling = new BABYLON.Vector3(goal_width,  playarea_height, 0);
   // Use this to view the boundaries
   if(showPlayArea) { S7.visibility = 0.5; S7.showBoundingBox = true; } else { S7.visibility = 0; }
   let S7_material = new BABYLON.StandardMaterial("white", scene);
   S7.material = S7_material;
   // Appears as CLOSEST RIGHT bounded box
-  let S8 = BABYLON.MeshBuilder.CreatePlane("side7", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+  let S8 = BABYLON.MeshBuilder.CreatePlane("side8", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
   S8.position.z = ground_length / 2;
   S8.position.y = playarea_yoff + (playarea_height / 2);
-  S8.position.x = -(ground_length / 2 - goal_width / 2);
-  S8.scaling = new BABYLON.Vector3(ground_length / 2.2,  playarea_height, 0);
+  S8.position.x = -(goal_width);
+  S8.scaling = new BABYLON.Vector3(goal_width,  playarea_height, 0);
   // Use this to view the boundaries
   if(showPlayArea) { S8.visibility = 0.5; S8.showBoundingBox = true; } else { S8.visibility = 0; }
   let S8_material = new BABYLON.StandardMaterial("white", scene);
   S8.material = S8_material;
+  // Appears as TOP bounded box
+  let S9 = BABYLON.MeshBuilder.CreatePlane("side9", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+  S9.position.y = playarea_height;
+  S9.scaling = new BABYLON.Vector3(ground_length,  0, ground_length);
+  // Use this to view the boundaries
+  if(showPlayArea) { S9.visibility = 0.5; S9.showBoundingBox = true; } else { S9.visibility = 0; }
+  let S9_material = new BABYLON.StandardMaterial("white", scene);
+  S9.material = S9_material;
+  // Appears as FAR RIGHT bounded box
+  let S10 = BABYLON.MeshBuilder.CreatePlane("side10", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+  S10.position.x = -(ground_length / 2);
+  S10.position.y = playarea_yoff + (playarea_height / 2);
+  S10.scaling = new BABYLON.Vector3(ground_length, playarea_height, ground_length);
+  S10.rotation.y = Math.PI / 2;
+  // Use this to view the boundaries
+  if(showPlayArea) { S10.visibility = 0.5; S10.showBoundingBox = true; } else { S10.visibility = 0; }
+  let S10_material = new BABYLON.StandardMaterial("white", scene);
+  S10.material = S10_material;
+  // Appears as FAR LEFT bounded box
+  let S11 = BABYLON.MeshBuilder.CreatePlane("side11", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+  S11.position.x = ground_length / 2;
+  S11.position.y = playarea_yoff + (playarea_height / 2);
+  S11.scaling = new BABYLON.Vector3(ground_length, playarea_height, ground_length);
+  S11.rotation.y = Math.PI / 2;
+  // Use this to view the boundaries
+  if(showPlayArea) { S11.visibility = 0.5; S11.showBoundingBox = true; } else { S11.visibility = 0; }
+  let S11_material = new BABYLON.StandardMaterial("white", scene);
+  S11.material = S11_material;
   // This creates and positions a follow camera
   let Camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 2, Math.PI / 2.5, 18, new BABYLON.Vector3(0, 0, 0), scene);
   Camera.applyGravity = true;
@@ -192,6 +223,9 @@ let createScene = function () {
   S6.physicsImpostor = new BABYLON.PhysicsImpostor(S6, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
   S7.physicsImpostor = new BABYLON.PhysicsImpostor(S7, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
   S8.physicsImpostor = new BABYLON.PhysicsImpostor(S8, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
+  S9.physicsImpostor = new BABYLON.PhysicsImpostor(S9, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
+  S10.physicsImpostor = new BABYLON.PhysicsImpostor(S10, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
+
   // Player object imposters
   Player1.physicsImpostor = new BABYLON.PhysicsImpostor(Player1, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: player_mass, friction: player_friction, restitution: player_restitution }, scene);
   AI.physicsImpostor = new BABYLON.PhysicsImpostor(AI, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: player_mass, friction: player_friction, restitution: player_restitution }, scene);
