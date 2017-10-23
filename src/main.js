@@ -211,11 +211,13 @@ engine.runRenderLoop(function () {
   // Register a render loop to repeatedly render the scene
   // Easy in-game reset for debugging
   if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
-  if(Puck.position.y < -20) {
+  if(Puck.position.y < -20) { //if someone scores a goal
     Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
 	  Puck.position.x = 0;
     Puck.position.y = 10;
     Puck.position.z = 0;
+    AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
+    Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
   }
   // Check keys
   if (key_D == true) {
@@ -234,6 +236,21 @@ engine.runRenderLoop(function () {
     Player1.position.z -= 1.6 * player_speed;
   }
   // Display to the screen ~60fps
+
+  //control AI
+
+  if(AI.position.x < Puck.position.x - .15) {
+    AI.position.x += player_speed * .8;
+  } else if(AI.position.x > Puck.position.x + .15){
+    AI.position.x -= player_speed * .8;
+  }
+
+  if(Puck.position.z < 0) {
+    AI.position.z += player_speed * .8;
+  } else if(Puck.position.z > -37){
+    AI.position.z -= player_speed * .8;
+  }
+
   scene.render();
 });
 // @END UPDATE LOOP
