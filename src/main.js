@@ -11,6 +11,7 @@ let player_diameter = 5;
 let player_yoff = player_height / 2;
 let player_polygons = 50;
 let player_speed = 0.33;
+let ai_speed = 0.33;
 let player_mass = 2000;
 let player_friction = 0.002;
 let player_restitution = 0.25;
@@ -30,7 +31,7 @@ let ground_yoff = -0.5;
 let playarea_height = 20;
 let playarea_yoff = -0.5;
 let playarea_restitution = 1;
-let showPlayArea = false;
+let showPlayArea = true;
 
 let goal_height = 0.2;
 let goal_width = ground_length / 4;
@@ -173,7 +174,7 @@ let createScene = function () {
   let S8_material = new BABYLON.StandardMaterial("white", scene);
   S8.material = S8_material;
   // This creates and positions a follow camera
-  let Camera = new BABYLON.FollowCamera("camera1", Player1.position, scene);
+  let Camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 2, Math.PI / 2.5, 18, new BABYLON.Vector3(0, 0, 0), scene);
   Camera.applyGravity = true;
   Camera.checkCollisions = true;
   Camera.rotationOffset = 0;
@@ -207,11 +208,58 @@ let createScene = function () {
 // @END SCENE OBJECT INSTANTIATION
 let scene = createScene();
 // UPDATE LOOP
+
+function AIReturn() { //sends ai back to starting position
+  if(AI.position.x > 0) {
+    AI.position.x -= ai_speed;
+  } else {
+    AI.position.x += ai_speed;
+  }
+
+  if(AI.position.z > -35) {
+    AI.position.z -= ai_speed;
+  } else {
+    AI.position.z += ai_speed;
+  }
+}
+
+function AIFollowPuckX() { //sets the ai's x coord to the puck's x coord
+  if(AI.position.x < Puck.position.x - .2) {
+    AI.position.x += ai_speed;
+  } else if(AI.position.x > Puck.position.x + .2){
+    AI.position.x -= ai_speed;
+  }
+}
+
+function PuckOnBlueSide() {
+  return Puck.position.z < -0.5;
+}
+
+function PlayerOnBlueSide() {
+  return Player1.position.z < -0.5;
+}
+
+function PuckBehindAI() {
+  return Puck.position.z < AI.position.z - 2;
+}
+
+function PlayerHittingBack() {
+  return Player1.position.z > 37;
+}
+
+function PlayerHittingLeft() {
+  return Player1.position.x > 24;
+}
+
+function PlayerHittingRight() {
+  return Player1.position.x < -24;
+}
+
 engine.runRenderLoop(function () {
   // Register a render loop to repeatedly render the scene
   // Easy in-game reset for debugging
   if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
-  if(Puck.position.y < -20) { //if someone scores a goal
+  if(Puck.position.y < -20) {
     Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
 	  Puck.position.x = 0;
     Puck.position.y = 10;
@@ -233,28 +281,51 @@ engine.runRenderLoop(function () {
     Player1.position.z -= player_speed;
   }
   if (key_SPACE == true) {
-    Player1.position.z -= 1.6 * player_speed;
+    player_speed = 0.66;
+  } else {
+    player_speed = 0.33;
   }
   // Display to the screen ~60fps
 
-  //control AI
+  //prevent player1 from going to places that cause problems
 
-  if(AI.position.x < Puck.position.x - .15) {
-    AI.position.x += player_speed * .8;
-  } else if(AI.position.x > Puck.position.x + .15){
-    AI.position.x -= player_speed * .8;
+  if(PlayerOnBlueSide()) {
+    Player1.position.z += player_speed;
   }
 
-  if(Puck.position.z < 0) {
-    if(Puck.position.z < AI.position.z) {
-      AI.position.z -= player_speed * 1.6;
-    } else {
-      AI.position.z += player_speed * .8;
+  if(PlayerHittingBack()) {
+    Player1.position.z -= player_speed;
+  }
+
+  if(PlayerHittingLeft()) {
+    Player1.position.x -= player_speed;
+  }
+
+  if(PlayerHittingRight()) {
+    Player1.position.x += player_speed;
+  }
+
+  //control ai
+
+  AIFollowPuckX();
+
+  if(Puck.position.y > 11) {
+    AIReturn();
+  } else {
+
+    if(PuckOnBlueSide()) { //if the puck is on the blue side
+      if(Puck.position.z < AI.position.z) { //if the puck is behind the ai
+        if(Puck.position.x < 0) { //if the puck is on one side of the arena
+          AI.position.x -= ai_speed * 1.2;
+        } else {
+          AI.position.x += ai_speed * 1.2;
+        }
+        AI.position.z -= ai_speed * 1.2;
+      } else {
+        AI.position.z += ai_speed;
+      }
     }
-  } else if(Puck.position.z > -37){
-    AI.position.z -= player_speed * .8;
   }
-
   scene.render();
 });
 // @END UPDATE LOOP
