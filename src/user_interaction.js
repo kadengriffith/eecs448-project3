@@ -1,8 +1,17 @@
 // filename    : user_interaction.js
 // description : Definitions and helper methods
 // last update : 10 20 2017
-
 // ADDITIONAL FUNCTIONS
+function gameKeys() {
+  let key_W = false;
+  let key_A = false;
+  let key_S = false;
+  let key_D = false;
+  let key_SPACE = false;
+  // Add listeners to detect user input
+  window.addEventListener("keydown", onKeyDown, false);
+  window.addEventListener("keyup", onKeyUp, false);
+}
 // Controlling Player1
 function onKeyDown(event) {
   let key_Code = event.keyCode;

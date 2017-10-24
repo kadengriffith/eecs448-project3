@@ -1,17 +1,45 @@
 // filename    : objects_toRender.js
 // description : Helper functions to keep main.js less cluttered
 // last update : 10 23 2017
-
 function gameObjects() {
   let Puck;
   let Player1;
   let AI;
-
-  let S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, Ground;
-
+  let S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, Ground, Top;
   let Light;
+  // Player
+  let player_height = 1;
+  let player_diameter = 5;
+  let player_yoff = player_height / 2;
+  let player_polygons = 50;
+  let player_speed = 0.33;
+  let ai_speed = 0.33;
+  let player_mass = 2000;
+  let player_friction = 0.002;
+  let player_restitution = 0.25;
+  // Puck
+  let puck_height = 0.3;
+  let puck_diameter = 3.25;
+  let puck_yoff = puck_height / 2;
+  let puck_polygons = 50;
+  let puck_mass = 4;
+  let puck_friction = 0.0001;
+  let puck_restitution = 0.3;
+  // Ground
+  let ground_length = 80;
+  let ground_restitution = 1;
+  let ground_yoff = -0.5;
+  // Walls
+  let playarea_height = 25;
+  let playarea_yoff = -0.5;
+  let playarea_restitution = 1;
+  // Goal
+  let goal_height = 0.16; // ~Half puck_height
+  let goal_width = ground_length / 3;
+  // Scores
+  let score_blue = 0;
+  let score_red = 0;
 }
-
 // Used in scene creation
 function loadGameObjects(scene) {
   // This creates a light, aiming 0,1,0 - to the sky
@@ -22,6 +50,11 @@ function loadGameObjects(scene) {
   Ground.position.y = ground_yoff;
   Ground.scaling.y = 0.01;
   loadMaterial(Ground, "ground", true, [0.7, 0.7, 0.7], scene);
+  // This creates the top of the play area
+  Top = BABYLON.Mesh.CreateBox("top", ground_length, scene);
+  Top.position.y = playarea_height + ground_yoff;
+  Top.scaling.y = 0.01;
+  loadMaterial(Top, "top", true, [0.7, 0.7, 0.7], scene);
   // This creates the puck
   Puck = BABYLON.Mesh.CreateCylinder("puck", puck_height, puck_diameter, puck_diameter, puck_polygons, 1, scene);
   Puck.position = new BABYLON.Vector3(0, puck_yoff + 10, 0);
@@ -108,31 +141,24 @@ function loadGameObjects(scene) {
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S8.visibility = 0.5; S8.showBoundingBox = true; } else { S8.visibility = 0; }
   loadMaterial(S8, "side8", false, [1.0, 1.0, 1.0], scene);
-  // Appears as TOP bounded box
+  // Appears as FAR RIGHT bounded box
   S9 = BABYLON.MeshBuilder.CreatePlane("side9", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
-  S9.scaling = new BABYLON.Vector3(ground_length,  0, ground_length);
-  S9.position.y = playarea_height;
+  S9.scaling = new BABYLON.Vector3(ground_length, playarea_height, ground_length);
+  S9.rotation.y = Math.PI / 2;
+  S9.position.x = -(ground_length / 2);
+  S9.position.y = playarea_yoff + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S9.visibility = 0.5; S9.showBoundingBox = true; } else { S9.visibility = 0; }
   loadMaterial(S9, "side9", false, [1.0, 1.0, 1.0], scene);
-  // Appears as FAR RIGHT bounded box
+  // Appears as FAR LEFT bounded box
   S10 = BABYLON.MeshBuilder.CreatePlane("side10", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
   S10.scaling = new BABYLON.Vector3(ground_length, playarea_height, ground_length);
   S10.rotation.y = Math.PI / 2;
-  S10.position.x = -(ground_length / 2);
+  S10.position.x = ground_length / 2;
   S10.position.y = playarea_yoff + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S10.visibility = 0.5; S10.showBoundingBox = true; } else { S10.visibility = 0; }
   loadMaterial(S10, "side10", false, [1.0, 1.0, 1.0], scene);
-  // Appears as FAR LEFT bounded box
-  S11 = BABYLON.MeshBuilder.CreatePlane("side11", playarea_height, scene, false, BABYLON.Mesh.DEFAULTSIDE);
-  S11.scaling = new BABYLON.Vector3(ground_length, playarea_height, ground_length);
-  S11.rotation.y = Math.PI / 2;
-  S11.position.x = ground_length / 2;
-  S11.position.y = playarea_yoff + (playarea_height / 2);
-  // Use showPlayArea to view the boundaries
-  if(showPlayArea) { S11.visibility = 0.5; S11.showBoundingBox = true; } else { S11.visibility = 0; }
-  loadMaterial(S11, "side11", false, [1.0, 1.0, 1.0], scene);
   // This creates and positions a follow camera
   Camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 2, Math.PI / 2.5, 18, new BABYLON.Vector3(0, 0, 0), scene);
   Camera.applyGravity = true;
@@ -146,6 +172,7 @@ function loadGameObjects(scene) {
 function loadGameImposters(scene) {
   // Imposters for Babylon/Cannon's calculations
   Ground.physicsImpostor = new BABYLON.PhysicsImpostor(Ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: ground_restitution }, scene);
+  Top.physicsImpostor = new BABYLON.PhysicsImpostor(Top, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: ground_restitution }, scene);
   S1.physicsImpostor = new BABYLON.PhysicsImpostor(S1, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
   S2.physicsImpostor = new BABYLON.PhysicsImpostor(S2, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
   S3.physicsImpostor = new BABYLON.PhysicsImpostor(S3, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
@@ -156,7 +183,6 @@ function loadGameImposters(scene) {
   S8.physicsImpostor = new BABYLON.PhysicsImpostor(S8, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
   S9.physicsImpostor = new BABYLON.PhysicsImpostor(S9, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
   S10.physicsImpostor = new BABYLON.PhysicsImpostor(S10, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
-  S11.physicsImpostor = new BABYLON.PhysicsImpostor(S11, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: playarea_restitution }, scene);
   // Player object imposters
   Player1.physicsImpostor = new BABYLON.PhysicsImpostor(Player1, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: player_mass, friction: player_friction, restitution: player_restitution }, scene);
   AI.physicsImpostor = new BABYLON.PhysicsImpostor(AI, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: player_mass, friction: player_friction, restitution: player_restitution }, scene);

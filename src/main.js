@@ -7,51 +7,12 @@
 // INITIAL SETTINGS
 let showPlayArea = false;
 let loadTextures = false;
-// Player
-let player_height = 1;
-let player_diameter = 5;
-let player_yoff = player_height / 2;
-let player_polygons = 50;
-let player_speed = 0.33;
-let ai_speed = 0.33;
-let player_mass = 2000;
-let player_friction = 0.002;
-let player_restitution = 0.25;
-// Puck
-let puck_height = 0.3;
-let puck_diameter = 3.25;
-let puck_yoff = puck_height / 2;
-let puck_polygons = 50;
-let puck_mass = 2;
-let puck_friction = 0.0001;
-let puck_restitution = 0.3;
-// Ground
-let ground_length = 80;
-let ground_restitution = 1;
-let ground_yoff = -0.5;
-// Walls
-let playarea_height = 25;
-let playarea_yoff = -0.5;
-let playarea_restitution = 1;
-// Goal
-let goal_height = 0.16; // ~Half puck_height
-let goal_width = ground_length / 3;
-// Other variables
+// Object variables
 gameObjects(); // See objects_toRender.js
-// Scores
-let score_blue = 0;
-let score_red = 0;
 // Time - See time.js
 let minutes = 5; // Match length >= 1
 // Keys to check in-game
-let key_W = false;
-let key_A = false;
-let key_S = false;
-let key_D = false;
-let key_SPACE = false;
-// Add listeners to detect user input
-window.addEventListener("keydown", onKeyDown, false);
-window.addEventListener("keyup", onKeyUp, false);
+gameKeys(); // See user_interaction.js
 // @END INITIAL SETTINGS
 // CONTEXT & ENGINE
 let game = document.getElementById('view_GAME');
@@ -83,7 +44,6 @@ let scene = createScene();
 // @END SCENE INSTANTIATION
 startSeconds(); // See time.js
 // UPDATE LOOP
-
 function AIReturn() { //sends ai back to starting position
   if(AI.position.x > 0) {
     AI.position.x -= ai_speed;

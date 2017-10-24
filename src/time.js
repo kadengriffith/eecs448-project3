@@ -1,11 +1,9 @@
 // filename    : time.js
-// description : Timeline helper functions
+// description : Timeline helper functions; Scoring
 // last update : 10 23 2017
-
 let game_seconds = 0;
 let seconds = 0;
 // let minutes = 5; See main.js
-
 function startSeconds() {
   setInterval(function(){
     if(seconds % 60 === 0) {
@@ -26,7 +24,7 @@ function startSeconds() {
     seconds++;
   }, 1000);
 }
-
+// Used for displaying score to HUD
 function getScore() {
   document.getElementsByClassName("score")[0].innerHTML = score_red;
   document.getElementsByClassName("score")[1].innerHTML = score_blue;
