@@ -42,7 +42,7 @@ gameObjects(); // See objects_toRender.js
 let score_blue = 0;
 let score_red = 0;
 // Time - See time.js
-let minutes = 5; // Match length
+let minutes = 5; // Match length >= 1
 // Keys to check in-game
 let key_W = false;
 let key_A = false;
@@ -131,6 +131,7 @@ function PlayerHittingRight() {
 }
 
 engine.runRenderLoop(function () {
+  getScore(); // See time.js
   // Easy in-game reset for debugging
   if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
   // Reset the puck if goal
@@ -141,6 +142,24 @@ engine.runRenderLoop(function () {
     Puck.position.z = 0;
     AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
     Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
+  }
+  if(Puck.position.z > ground_length / 2 + puck_diameter) {
+    Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
+	  Puck.position.x = 0;
+    Puck.position.y = 10;
+    Puck.position.z = 0;
+    AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
+    Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
+    setTimeout(score_blue++, 2000);
+  }
+  if(Puck.position.z < -(ground_length / 2) - puck_diameter) {
+    Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
+	  Puck.position.x = 0;
+    Puck.position.y = 10;
+    Puck.position.z = 0;
+    AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
+    Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
+    setTimeout(score_red++, 2000);
   }
   // Check keys
   if (key_D == true) {
