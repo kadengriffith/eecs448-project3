@@ -1,7 +1,6 @@
 // filename    : objects_toRender.js
 // description : Helper functions to keep main.js less cluttered
 // last update : 10 23 2017
-function gameObjects() {
   let Puck;
   let Player1;
   let AI;
@@ -39,7 +38,7 @@ function gameObjects() {
   // Scores
   let score_blue = 0;
   let score_red = 0;
-}
+
 // Used in scene creation
 function loadGameObjects(scene) {
   // This creates a light, aiming 0,1,0 - to the sky

@@ -7,12 +7,8 @@
 // INITIAL SETTINGS
 let showPlayArea = false;
 let loadTextures = false;
-// Object variables
-gameObjects(); // See objects_toRender.js
 // Time - See time.js
 let minutes = 5; // Match length >= 1
-// Keys to check in-game
-gameKeys(); // See user_interaction.js
 // @END INITIAL SETTINGS
 // CONTEXT & ENGINE
 let game = document.getElementById('view_GAME');
