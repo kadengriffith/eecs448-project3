@@ -1,14 +1,18 @@
 // filename    : main.js
 // description : Main game loop
-// last update : 10 23 2017
+// last update : 10 25 2017
 //########################
 //  G A M E   S T A R T
 //########################
 // INITIAL SETTINGS
-let showPlayArea = false;
-let loadTextures = false;
-// Time - See time.js
-let minutes = 5; // Match length >= 1
+let showPlayArea = true;
+let enableTime = true;
+let reloadOnTimeEnd = false; // After time length reload the window
+let loadTextures = false; // Only true when server-side
+let gravityConst = -9.81; /* -9.81 */
+// Time - Match length >= 1
+let minutes = 1; // See time.js
+document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
 // @END INITIAL SETTINGS
 // CONTEXT & ENGINE
 let game = document.getElementById('view_GAME');
@@ -38,58 +42,12 @@ let createScene = function () {
 };
 let scene = createScene();
 // @END SCENE INSTANTIATION
-startSeconds(); // See time.js
+if(enableTime) { startSeconds(); } // See time.js
 // UPDATE LOOP
-function AIReturn() { //sends ai back to starting position
-  if(AI.position.x > 0) {
-    AI.position.x -= ai_speed;
-  } else {
-    AI.position.x += ai_speed;
-  }
-
-  if(AI.position.z > -35) {
-    AI.position.z -= ai_speed;
-  } else {
-    AI.position.z += ai_speed;
-  }
-}
-
-function AIFollowPuckX() { //sets the ai's x coord to the puck's x coord
-  if(AI.position.x < Puck.position.x - .2) {
-    AI.position.x += ai_speed;
-  } else if(AI.position.x > Puck.position.x + .2){
-    AI.position.x -= ai_speed;
-  }
-}
-
-function PuckOnBlueSide() {
-  return Puck.position.z < -0.5;
-}
-
-function PlayerOnBlueSide() {
-  return Player1.position.z < -0.5;
-}
-
-function PuckBehindAI() {
-  return Puck.position.z < AI.position.z - 2;
-}
-
-function PlayerHittingBack() {
-  return Player1.position.z > 37;
-}
-
-function PlayerHittingLeft() {
-  return Player1.position.x > 24;
-}
-
-function PlayerHittingRight() {
-  return Player1.position.x < -24;
-}
-
 engine.runRenderLoop(function () {
   getScore(); // See time.js
   // Easy in-game reset for debugging
-  if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
+  // if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
   // Reset the puck if goal
   if(Puck.position.y < -20) {
     Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
@@ -129,6 +87,12 @@ engine.runRenderLoop(function () {
   }
   if (key_W == true) {
     Player1.position.z -= player_speed;
+  }
+  if (key_P == true) {
+  	Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
+    Puck.position.x = 0;
+    Puck.position.y = 10;
+    Puck.position.z = 0;
   }
   if (key_SPACE == true) {
     player_speed = 0.66;

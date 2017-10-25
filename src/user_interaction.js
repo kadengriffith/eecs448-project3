@@ -1,16 +1,17 @@
 // filename    : user_interaction.js
 // description : Definitions and helper methods
-// last update : 10 23 2017
+// last update : 10 20 2017
+// Keys to check in-game
+let key_W = false;
+let key_A = false;
+let key_S = false;
+let key_D = false;
+let key_SPACE = false;
+let key_P = false;
+// Add listeners to detect user input
+window.addEventListener("keydown", onKeyDown, false);
+window.addEventListener("keyup", onKeyUp, false);
 // ADDITIONAL FUNCTIONS
-  let key_W = false;
-  let key_A = false;
-  let key_S = false;
-  let key_D = false;
-  let key_SPACE = false;
-  // Add listeners to detect user input
-  window.addEventListener("keydown", onKeyDown, false);
-  window.addEventListener("keyup", onKeyUp, false);
-
 // Controlling Player1
 function onKeyDown(event) {
   let key_Code = event.keyCode;
@@ -30,6 +31,9 @@ function onKeyDown(event) {
       break;
     case 32: // space
       key_SPACE = true;
+      break;
+    case 80: // p
+      key_P = true;
       break;
   }
 }
@@ -51,6 +55,9 @@ function onKeyUp(event) {
       break;
     case 32: // space
       key_SPACE = false;
+      break;
+    case 80: // p
+      key_P = false;
       break;
   }
 }

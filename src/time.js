@@ -8,10 +8,13 @@ function startSeconds() {
   setInterval(function(){
     if(seconds % 60 === 0) {
       seconds = 0;
-      minutes--;
+      if(minutes > 0) { minutes--; } else {
+        return;
+      }
     }
-    if(minutes < 0 && seconds === 0) {
-      window.location.reload();
+    if(minutes < 0 && seconds < 1) {
+      document.getElementsByClassName("time")[0].innerHTML = "0:00";
+      if(reloadOnTimeEnd) { window.location.reload(); }
     }else {
       calculated_sec = 59 - seconds;
       if(calculated_sec > 9) {
