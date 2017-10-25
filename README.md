@@ -1,3 +1,4 @@
-# eecs448-project3
-# live demo: https://kadengriffith.me/eecs448-project3/home.html
-# this is helpful when we're working with graphics, and a badass game when we aren't
+# Puck Yeah, baby!
+live demo: https://kadengriffith.me/eecs448-project3/home.html
+#
+...this is helpful when we're working with graphics, and a badass game when we aren't
