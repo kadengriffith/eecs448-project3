@@ -11,6 +11,7 @@
       margin:0;
       padding:0;
       width:100%;
+      min-width:100%;
       height:100%;
       font-family:monospace;
       cursor:none;
@@ -18,7 +19,67 @@
     html:hover, body:hover {
       cursor:none;
     }
+    .header {
+      display:block;
+      margin:0;
+      width:100%;
+      height:15%;
+      min-height:72px;
+      text-align:center;
+      background-color:#333;
+      box-shadow:0.5px 5px 10px rgba(0,0,0,0.3);
+      z-index:12;
+    }
+    .header > img {
+      margin-left:auto;
+      margin-right:auto;
+      padding-top:0.5em;
+    }
+    .footer {
+      display:block;
+      position:absolute;
+      margin:0;
+      bottom:0;
+      width:100%;
+      height:5%;
+      text-align:center;
+      background-color:#333;
+      box-shadow:0.5px 5px 10px rgba(0,0,0,0.3);
+      z-index:12;
+    }
+    .footer > img {
+      margin-left:auto;
+      margin-right:auto;
+      padding-bottom:2%;
+    }
+    .textured_button {
+      display:block;
+      margin:0.5em;
+      margin-left:auto;
+      margin-right:auto;
+      height:44px;
+      width:189px;
+      text-align:center;
+      font-family:monospace;
+      font-size:34px;
+      text-decoration:none;
+      text-emphasis-style:sesame;
+      color:#cbcbcb;
+      background-image:url('img/font/button_background.png');
+      background-position:center;
+      background-repeat:no-repeat;
+      background-size:cover;
+      border-radius:3.4px;
+      box-shadow:3px 6px 8px rgba(0,0,0,0.3);
+    }
+    .textured_button:hover {
+      background-image:url('img/font/button_background_hover.png');
+      box-shadow:0px 2px 6px rgba(0,0,0,0.5);
+      color:#cecece;
+      transition:0.15s;
+    }
     #view_GAME {
+
       width:100%;
       height:100%;
    /* touch-action:none; */
@@ -66,6 +127,17 @@
     	margin-left:auto;
     	background-color:rgba(0,0,0,0.1);
     }
+    .view_screen {
+      display:block;
+      height:100%;
+      width:100%;
+      position:absolute;
+      margin:0;
+      padding:0;
+      top:0;
+      left:0;
+      z-index:10;
+    }
   </style>
   <!-- Preload -->
   <script src="src/babylon.custom.js" type="text/javascript"></script>
@@ -75,16 +147,60 @@
   <script src="src/ai.js" type="text/javascript"></script>
 </head>
 <body>
-	<div style="position:fixed;padding:0.5em;">
-	<div>Use W, A, S, D to move; SPACE to hit.</div>
-	<div>Use P to place the puck back at center.</div>
-	</div>
-  <canvas id="view_GAME"></canvas>
-  <div class="wrapper">
-    <div class="scoreTitle"> <div style="float:left;margin-left:10px;"> Red&nbsp; </div> | <div style="float:right;margin-right:10px;"> Blue </div></div>
-	  <div class="scorePoints"> <div class="score" style="float:left;margin-left:10px;"> 0 </div> | <div class="score" style="float:right;margin-right:10px;"> 0 </div> </div>
-	  <div class="time"> <!-- Leave Blank See main.js --> </div>
+  <div class="view_screen" style="display:none;">
+	  <div style="position:fixed;padding:0.5em;">
+	    <div>Use W, A, S, D to move; SPACE to hit.</div>
+	    <div>Use P to place the puck back at center.</div>
+	  </div>
+    <div class="wrapper">
+      <div class="scoreTitle"> <div style="float:left;margin-left:10px;"> Red&nbsp; </div> | <div style="float:right;margin-right:10px;"> Blue </div></div>
+	    <div class="scorePoints"> <div class="score" style="float:left;margin-left:10px;"> 0 </div> | <div class="score" style="float:right;margin-right:10px;"> 0 </div> </div>
+	    <div class="time"> <!-- Leave Blank See main.js --> </div>
+    </div>
   </div>
+  <div class="view_screen" style="display:block;cursor:default;">
+    <div class="wrapper">
+    <div class="header">
+      <img draggable="false" src="img/font/puckyeah_70.png" />
+    </div>
+    <div style="float:left;width:69%;display:inline-block;text-align:center;">
+      <a onclick="javascript:game_view()" class="textured_button" style="margin-top:10%;">PLAY</a><br>
+      <a href="#" class="textured_button">SETTINGS</a><br>
+      <div class="footer">
+        <img draggable="false" src="img/font/team_25.png" />
+      </div>
+    </div>
+    <div style="position:absolute;right:0;text-align:center;background-color:rgba(0,0,0,0.2);float:right;width:30%;display:inline-block;min-height:100%;">
+      <img draggable="false" style="margin-top:10%;" src="img/font/leader_35.png" />
+    </div>
+  </div>
+</div>
+  <div class="view_screen" style="display:none;">
+    <div class="wrapper">
+      <a onclick="#" class="button">SETTINGS</a><br>
+      <a onclick="javascript:home_view()" class="textured_button">QUIT MATCH</a><br>
+      <a onclick="javascript:game_view()" class="textured_button">BACK</a>
+    </div>
+  </div>
+  <canvas id="view_GAME"></canvas>
   <script src="src/main.js" type="text/javascript"></script>
+  <script>
+  function game_view() {
+    document.getElementsByClassName('view_screen')[0].style.display = 'block';
+    document.getElementsByClassName('view_screen')[1].style.display = 'none';
+    document.getElementsByClassName('view_screen')[2].style.display = 'none';
+    paused = false;
+  }
+  function home_view() {
+    document.getElementsByClassName('view_screen')[0].style.display = 'none';
+    document.getElementsByClassName('view_screen')[1].style.display = 'block';
+    document.getElementsByClassName('view_screen')[2].style.display = 'none';
+  }
+  function menu_view() {
+    document.getElementsByClassName('view_screen')[0].style.display = 'none';
+    document.getElementsByClassName('view_screen')[1].style.display = 'none';
+    document.getElementsByClassName('view_screen')[2].style.display = 'block';
+  }
+  </script>
 </body>
 </html>

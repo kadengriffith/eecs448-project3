@@ -7,6 +7,7 @@
   let AI;
   let S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, Ground, Top;
   let Light;
+  let Camera1, Camera2, Camera3, Camera4, Camera5;
   // Player
   let player_height = 1;
   let player_diameter = 5.5;
@@ -57,6 +58,7 @@ function loadGameObjects(scene) {
   Top.position.y = playarea_height + ground_yoff;
   Top.scaling.y = 0.01;
   loadMaterial(Top, "top", false, false, [0.7, 0.7, 0.7], scene);
+  Top.visibility = 0;
   // This creates the puck
   Puck = BABYLON.Mesh.CreateCylinder("puck", puck_height, puck_diameter, puck_diameter, puck_polygons, 1, scene);
   Puck.position = new BABYLON.Vector3(0, puck_yoff + 10, 0);
@@ -118,7 +120,7 @@ function loadGameObjects(scene) {
   }
   // Appears as BACK CENTER bounded box
   S5 = BABYLON.MeshBuilder.CreatePlane("side5", playarea_height, scene);
-  S5.scaling = new BABYLON.Vector3(goal_width, playarea_height - goal_height, 1);
+  S5.scaling = new BABYLON.Vector3(goal_width, playarea_height - 1.32, 1);
   S5.position.z = (-ground_length / 2);
   S5.position.y = goal_height + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
@@ -127,7 +129,7 @@ function loadGameObjects(scene) {
   }
   // Appears as CLOSEST CENTER bounded box
   S6 = BABYLON.MeshBuilder.CreatePlane("side6", playarea_height, scene);
-  S6.scaling = new BABYLON.Vector3(goal_width, playarea_height - goal_height, 1);
+  S6.scaling = new BABYLON.Vector3(goal_width, playarea_height - 1.32, 1);
   S6.position.z = ground_length / 2;
   S6.position.y = goal_height + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
@@ -181,13 +183,28 @@ function loadGameObjects(scene) {
     S10.material.alpha = 0;
   }
   // This creates and positions a follow camera for the main game
-  Camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 2, Math.PI / 2.5, 14, new BABYLON.Vector3(0, 0, 0), scene);
-  Camera.applyGravity = true;
-  Camera.checkCollisions = true;
-  Camera.rotationOffset = 0;
-  Camera.lockedTarget = Player1;
+  Camera1 = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 2, Math.PI / 2.5, 14, new BABYLON.Vector3(0, 0, 0), scene);
+  Camera1.applyGravity = true;
+  Camera1.checkCollisions = true;
+  Camera1.rotationOffset = 0;
+  Camera1.lockedTarget = Player1;
+  // This creates and positions a camera for the menu
+  Camera2 = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 6, Math.PI / 3, 120, new BABYLON.Vector3(0, 0, 0), scene);
+  Camera2.rotationOffset = Math.PI / 2;
+  Camera2.lockedTarget = new BABYLON.Vector3(0, 0, 0);
+  // This creates and positions a camera for the menu
+  Camera3 = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 6, Math.PI / 6, 14, new BABYLON.Vector3(0, 0, 0), scene);
+  Camera3.rotationOffset = -Math.PI / 6;
+  Camera3.lockedTarget = Puck;
+  // This creates and positions a camera for the menu
+  Camera4 = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 8, Math.PI / 2.8, 60, new BABYLON.Vector3(0, 0, 0), scene);
+  Camera4.rotationOffset = -Math.PI;
+  Camera4.lockedTarget = new BABYLON.Vector3(0, 0, 0);
+  // This creates and positions a camera for the menu
+  Camera5 = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 3, Math.PI / 3, 90, new BABYLON.Vector3(0, 0, 0), scene);
+  Camera5.lockedTarget = new BABYLON.Vector3(0, 0, 0);
   // Setting game camera
-  scene.activeCamera = Camera;
+  scene.activeCamera = Camera2;
 }
 // Used in scene creation
 function loadGameImposters(scene) {

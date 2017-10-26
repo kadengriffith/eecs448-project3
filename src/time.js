@@ -4,8 +4,9 @@
 let game_seconds = 0;
 let seconds = 0;
 // let minutes = 5; See main.js
-let paused = false;
+let paused = true;
 function startSeconds() {
+  seconds = 0;
   setInterval(function(){
     if(!paused) {
       if(seconds % 60 === 0) {
@@ -25,9 +26,9 @@ function startSeconds() {
           document.getElementsByClassName("time")[0].innerHTML = minutes + ":0" + calculated_sec;
         }
       }
-      game_seconds++;
       seconds++;
     }
+    game_seconds++;
   }, 1000 /* One Second */);
 }
 // Used for displaying score to HUD

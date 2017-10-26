@@ -5,7 +5,7 @@
 //  G A M E   S T A R T
 //########################
 // INITIAL SETTINGS
-let showPlayArea = true;
+let showPlayArea = false;
 let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window
 let loadTextures = false; // Only true when server-side
@@ -42,10 +42,11 @@ let createScene = function () {
 };
 let scene = createScene();
 // @END SCENE INSTANTIATION
-if(enableTime) { startSeconds(); } // See time.js
+if(enableTime && game_seconds === 0) { startSeconds(); } // See time.js
 // UPDATE LOOP
 engine.runRenderLoop(function () {
   if(!paused) { // Else -> present pause menu
+    scene.activeCamera = Camera1;
     getScore(); // See time.js
     // Reset for debugging
     // if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
@@ -119,9 +120,43 @@ engine.runRenderLoop(function () {
         }
       }
     }
-    // Display to the screen ~60fps
-    scene.render();
+  }else {
+    // Enter camera sequence
+    if(game_seconds > 18 && game_seconds <= 36) {
+      scene.activeCamera = Camera3;
+      Camera3.alpha += -Math.PI / 1800;
+      if(Camera3.beta < (Math.PI / 2.8)) { Camera3.beta += Math.PI / 4000; }
+      Camera3.radius += 0.05;
+    }else if(game_seconds > 36 && game_seconds <= 60) {
+      scene.activeCamera = Camera4;
+      Camera4.alpha += Math.PI / 1800;
+    }else if(game_seconds > 60 && game_seconds <= 80) {
+      scene.activeCamera = Camera5;
+      Camera5.alpha += -Math.PI / 3000;
+      Camera5.radius += -0.03;
+    }else {
+      scene.activeCamera = Camera2;
+      Camera2.alpha += Math.PI / 1500;
+      if(Camera2.beta < Math.PI / 2) { Camera2.beta += Math.PI / 7000; }
+    }
+    if(game_seconds > 80) {
+      // Loop the animation
+      // Reset animation frames
+      game_seconds = 0;
+      Camera2.alpha = Math.PI / 6;
+      Camera2.beta= Math.PI / 3;
+      Camera3.alpha = Math.PI / 6;
+      Camera3.beta = Math.PI / 6;
+      Camera3.radius = 14;
+      Camera4.alpha = Math.PI / 8;
+      Camera4.beta = Math.PI / 2.8;
+      Camera5.alpha = Math.PI / 3;
+      Camera5.beta = Math.PI / 3;
+      Camera5.radius = 80;
+    }
   }
+  // Display to the screen ~60fps
+  scene.render();
 });
 // @END UPDATE LOOP
 //########################
