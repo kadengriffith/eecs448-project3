@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>EECS448 - Team "Team" Project 3</title>
+  <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
   <style>
     html, body {
       overflow:hidden;
@@ -13,7 +15,7 @@
       width:100%;
       min-width:100%;
       height:100%;
-      font-family:monospace;
+      font-family:'Dosis', sans-serif;
       cursor:none;
     }
     html:hover, body:hover {
@@ -59,27 +61,25 @@
       margin-right:auto;
       height:44px;
       width:189px;
+      letter-spacing:2px;
       text-align:center;
-      font-family:monospace;
-      font-size:34px;
+      font-size:32px;
       text-decoration:none;
-      text-emphasis-style:sesame;
       color:#cbcbcb;
       background-image:url('img/font/button_background.png');
       background-position:center;
       background-repeat:no-repeat;
       background-size:cover;
-      border-radius:3.4px;
-      box-shadow:3px 6px 8px rgba(0,0,0,0.3);
+      border-radius:4px;
+      box-shadow:3px 6px 8px rgba(0,0,0,0.4);
     }
     .textured_button:hover {
       background-image:url('img/font/button_background_hover.png');
       box-shadow:0px 2px 6px rgba(0,0,0,0.5);
-      color:#cecece;
+      color:#cdd;
       transition:0.15s;
     }
     #view_GAME {
-
       width:100%;
       height:100%;
    /* touch-action:none; */
@@ -100,32 +100,61 @@
     .scoreTitle {
     	display:block;
     	height:25px;
-  		width:100px;
-    	top:0;
+  		width:200px;
+    	top:1px;
+      font-size:19px;
+      font-weight:400;
+      color:#333;
   		margin-right:auto;
     	margin-left:auto;
-  		background-color:rgba(255,255,255,0.3);
-  		border: 3px solid #73AD21;
+  		background-image:url('img/font/score_title.png');
+      background-size:contain;
+      background-position:center;
+      box-shadow:0px 2px 6px rgba(0,0,0,0.05);
+      border-bottom-left-radius:4px;
+      border-bottom-right-radius:4px;
+      text-shadow:0px 0px 4px rgba(0,0,0,0.3);
       text-align:center;
     }
     .scorePoints {
   		display:block;
   		height:25px;
-  		width:100px;
-  		top:0;
+  		width:175px;
+  		top:0px;
+      font-size:24px;
+      color:#333;
   		margin-right:auto;
   		margin-left:auto;
-  		background-color:rgba(255,255,255,0.2);
-  		border: 3px solid #73AD21;
+      line-height:20px;
+      font-weight: 600;
+      font-family: 'Oxygen', sans-serif;
+      background-image:url('img/font/score_points.png');
+      background-size:contain;
+      background-position:center;
+      border-bottom-left-radius:4px;
+      border-bottom-right-radius:4px;
+      box-shadow:0px 2px 3px rgba(0,0,0,0.05);
       text-align:center;
+      text-shadow:0px 0px 4px rgba(0,0,0,0.4);
     }
     .time {
     	display:block;
-    	height:20px;
+    	height:30px;
     	width:100px;
+      font-size:28px;
+      line-height:30px;
+      letter-spacing:3px;
+      text-align:center;
     	margin-right:auto;
     	margin-left:auto;
-    	background-color:rgba(0,0,0,0.1);
+      color:#333;
+      background-image:url('img/font/score_time.png');
+      background-size:contain;
+      background-position:center;
+      border-bottom-left-radius:4px;
+      border-bottom-right-radius:4px;
+      text-shadow:0px 0px 3px rgba(0,0,0,0.3);
+      box-shadow:0px 2px 6px rgba(0,0,0,0.05);
     }
     .view_screen {
       display:block;
@@ -153,8 +182,8 @@
 	    <div>Use P to place the puck back at center.</div>
 	  </div>
     <div class="wrapper">
-      <div class="scoreTitle"> <div style="float:left;margin-left:10px;"> Red&nbsp; </div> | <div style="float:right;margin-right:10px;"> Blue </div></div>
-	    <div class="scorePoints"> <div class="score" style="float:left;margin-left:10px;"> 0 </div> | <div class="score" style="float:right;margin-right:10px;"> 0 </div> </div>
+      <div class="scoreTitle"> <div style="float:left;margin-left:32px;color:#e74c3c;"> RED </div>  <div style="float:right;margin-right:32px;color:#2980b9;"> BLUE </div></div>
+	    <div class="scorePoints"> <div class="score" style="float:left;margin-left:33px;"> 0 </div>  <div class="score" style="float:right;margin-right:33px;"> 0 </div> </div>
 	    <div class="time"> <!-- Leave Blank See main.js --> </div>
     </div>
   </div>
