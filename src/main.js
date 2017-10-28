@@ -46,6 +46,7 @@ if(enableTime && game_seconds === 0) { startSeconds(); } // See time.js
 // UPDATE LOOP
 engine.runRenderLoop(function () {
   if(!paused) { // Else -> present pause menu
+    game_view();
     scene.activeCamera = Camera1;
     getScore(); // See time.js
     // Reset for debugging
@@ -68,27 +69,27 @@ engine.runRenderLoop(function () {
       setTimeout(score_red++, 2000);
     }
     // Check keys
-    if (key_D == true) {
+    if (key_D) {
       Player1.position.x -= player_speed;
     }
-    if (key_S == true) {
+    if (key_S) {
       Player1.position.z += player_speed;
     }
-    if (key_A == true) {
+    if (key_A) {
       Player1.position.x += player_speed;
     }
-    if (key_W == true) {
+    if (key_W) {
       Player1.position.z -= player_speed;
     }
-    if (key_P == true) {
+    if (key_P) {
     	Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
       dropPuck("CENTER");
     }
-    if (key_ESC == true) {
-      paused = true; // Pause the game
+    if (key_ESC) {
+      menu_view(); // Pause the game
       Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
     }
-    if (key_SPACE == true) {
+    if (key_SPACE) {
       player_speed = 0.66;
     } else {
       player_speed = 0.33;

@@ -238,10 +238,10 @@
     </div>
   </div>
   <!-- This is the in-game menu -->
-  <div class="view_screen" style="display:none;">
+  <div class="view_screen" style="display:none;cursor:default;">
     <div class="wrapper">
       <a onclick="#" class="button"> SETTINGS </a><br>
-      <a onclick="javascript:home_view();" class="textured_button"> QUIT MATCH </a><br>
+      <a onclick="javascript:window.location.reload();" class="textured_button"> QUIT MATCH </a><br>
       <a onclick="javascript:game_view();" class="textured_button"> BACK </a>
     </div>
   </div>
@@ -261,6 +261,10 @@
     document.getElementsByClassName('view_screen')[2].style.display = 'none';
   }
   function menu_view() {
+    paused = true;
+    Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
+    Player1.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop player
+    AI.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop ai
     document.getElementsByClassName('view_screen')[0].style.display = 'none';
     document.getElementsByClassName('view_screen')[1].style.display = 'none';
     document.getElementsByClassName('view_screen')[2].style.display = 'block';

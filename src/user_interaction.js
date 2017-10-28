@@ -36,7 +36,7 @@ function onKeyDown(event) {
     case 80: // p
       key_P = true;
       break;
-    case 27: // p
+    case 27: // escape
       key_ESC = true;
       break;
   }
@@ -63,7 +63,7 @@ function onKeyUp(event) {
     case 80: // p
       key_P = false;
       break;
-    case 27: // Esc
+    case 27: // escape
       key_ESC = false;
       break;
   }
