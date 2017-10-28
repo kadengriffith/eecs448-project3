@@ -84,6 +84,13 @@ engine.runRenderLoop(function () {
     	Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
       dropPuck("CENTER");
     }
+    if (key_ESC == true) {
+      if (paused == true) {
+        paused = false; // resume the game, NOT FINISHED
+      } else {
+    	  paused = true; //pause the game
+      }
+    }
     if (key_SPACE == true) {
       player_speed = 0.66;
     } else {

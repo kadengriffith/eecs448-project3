@@ -8,6 +8,7 @@ let key_S = false;
 let key_D = false;
 let key_SPACE = false;
 let key_P = false;
+let key_ESC = false;
 // Add listeners to detect user input
 window.addEventListener("keydown", onKeyDown, false);
 window.addEventListener("keyup", onKeyUp, false);
@@ -35,6 +36,9 @@ function onKeyDown(event) {
     case 80: // p
       key_P = true;
       break;
+    case 27: // p
+      key_ESC = true;
+      break;
   }
 }
 
@@ -58,6 +62,9 @@ function onKeyUp(event) {
       break;
     case 80: // p
       key_P = false;
+      break;
+    case 27: // Esc
+      key_ESC = false;
       break;
   }
 }
