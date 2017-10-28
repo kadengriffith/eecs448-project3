@@ -85,7 +85,8 @@ engine.runRenderLoop(function () {
       dropPuck("CENTER");
     }
     if (key_ESC == true) {
-      paused = true; //pause the game
+      paused = true; // Pause the game
+      Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
     }
     if (key_SPACE == true) {
       player_speed = 0.66;
@@ -158,7 +159,7 @@ engine.runRenderLoop(function () {
       Camera5.radius = 80;
     }
     if (key_ESC == true) {
-      paused = false; //resume the game
+      paused = false; // Resume the game
     }
   }
   // Display to the screen ~60fps
