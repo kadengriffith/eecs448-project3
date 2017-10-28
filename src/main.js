@@ -85,11 +85,7 @@ engine.runRenderLoop(function () {
       dropPuck("CENTER");
     }
     if (key_ESC == true) {
-      if (paused == true) {
-        paused = false; // resume the game, NOT FINISHED
-      } else {
-    	  paused = true; //pause the game
-      }
+      paused = true; //pause the game
     }
     if (key_SPACE == true) {
       player_speed = 0.66;
@@ -160,6 +156,9 @@ engine.runRenderLoop(function () {
       Camera5.alpha = Math.PI / 3;
       Camera5.beta = Math.PI / 3;
       Camera5.radius = 80;
+    }
+    if (key_ESC == true) {
+      paused = false; //resume the game
     }
   }
   // Display to the screen ~60fps
