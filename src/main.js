@@ -108,8 +108,8 @@ engine.runRenderLoop(function () {
       Player1.position.x += player_speed;
     }
     //control ai
-    AIFollowPuckX();
-    if(Puck.position.y > 11) {
+	console.log(Puck.position);
+    if(Puck.position.y > 1 && Puck.position.y < 3) {
       AIReturn();
     } else {
       if(PuckOnBlueSide()) { //if the puck is on the blue side
@@ -123,7 +123,10 @@ engine.runRenderLoop(function () {
         } else {
           AI.position.z += ai_speed;
         }
-      }
+      } else {
+		AIBack();
+	  }
+	  AIFollowPuckX();
     }
   }else {
     // Enter camera sequence
