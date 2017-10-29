@@ -52,3 +52,11 @@ function AIBack() {
     AI.position.z -= ai_speed;
   }
 }
+
+function PuckStuckInLeftCorner() {
+	return Puck.position.z < -38 && Puck.position.x > 24;
+}
+
+function PuckStuckInRightCorner() {
+	return Puck.position.z < -38 && Puck.position.x < -24;
+}

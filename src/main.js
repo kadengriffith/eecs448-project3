@@ -108,10 +108,16 @@ engine.runRenderLoop(function () {
       Player1.position.x += player_speed;
     }
     //control ai
-	console.log(Puck.position);
+	console.log(Player1.position);
     if(Puck.position.y > 1 && Puck.position.y < 3) {
       AIReturn();
-    } else {
+    } else if(PuckStuckInLeftCorner()) {
+	  Puck.position.x -= player_speed;
+	  Puck.position.z += player_speed;
+	} else if(PuckStuckInRightCorner()) {
+	  Puck.position.x += player_speed;
+	  Puck.position.z += player_speed;
+	} else {
       if(PuckOnBlueSide()) { //if the puck is on the blue side
         if(Puck.position.z < AI.position.z) { //if the puck is behind the ai
           if(Puck.position.x < 0) { //if the puck is on one side of the arena
