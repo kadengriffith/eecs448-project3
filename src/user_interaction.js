@@ -68,6 +68,71 @@ function onKeyUp(event) {
       break;
   }
 }
+// Manipulates the team label on the HUD
+function getTeam() {
+  let team = document.getElementById('team_select').value;
+  if(team === "RED") {
+    let text = document.getElementById('player_scoreDisplay');
+    text.innerHTML = "RED";
+    _color = "red";
+    if(loadTextures) {
+      let _material = new BABYLON.StandardMaterial("texture_player_red", scene);
+      _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_player_red.png", scene);
+      _material.specularColor = new BABYLON.Color3(1.0, 1.0, 1.0);
+      Player1.material = _material;
+    }
+    text.style.color = "#e74c3c";
+    loadGraphics(_color);
+  }
+  if(team === "GREEN") {
+    let text = document.getElementById('player_scoreDisplay');
+    text.innerHTML = "GREEN";
+    _color = "green";
+    if(loadTextures) {
+      let _material = new BABYLON.StandardMaterial("texture_player_green", scene);
+      _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_player_green.png", scene);
+      _material.specularColor = new BABYLON.Color3(1.0, 1.0, 1.0);
+      Player1.material = _material;
+    }
+    text.style.color = "#27ae60";
+    loadGraphics(_color);
+  }
+  if(team === "BLUE") {
+    let text = document.getElementById('player_scoreDisplay');
+    text.innerHTML = "BLUE";
+    _color = "blue";
+    if(loadTextures) {
+      let _material = new BABYLON.StandardMaterial("texture_player_blue", scene);
+      _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_player_blue.png", scene);
+      _material.specularColor = new BABYLON.Color3(1.0, 1.0, 1.0);
+      Player1.material = _material;
+    }
+    text.style.color = "#2980b9";
+    loadGraphics(_color);
+  }
+  if(team === "YELLOW") {
+    let text = document.getElementById('player_scoreDisplay');
+    text.innerHTML = "YELLOW";
+    _color = "yellow";
+    if(loadTextures) {
+      let _material = new BABYLON.StandardMaterial("texture_player_yellow", scene);
+      _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_player_yellow.png", scene);
+      _material.specularColor = new BABYLON.Color3(1.0, 1.0, 1.0);
+      Player1.material = _material;
+    }
+    text.style.color = "#f1c40f";
+    loadGraphics(_color);
+  }
+}
+
+function loadGraphics(color) {
+  let image_ = document.getElementsByClassName('scoreTitle')[0];
+  image_.style.backgroundImage = "url('img/font/score_title_" + color + ".png')";
+  image_ = document.getElementsByClassName('scorePoints')[0];
+  image_.style.backgroundImage = "url('img/font/score_points_" + color + ".png')";
+  image_ = document.getElementsByClassName('time')[0];
+  image_.style.backgroundImage = "url('img/font/score_time_" + color + ".png')";
+}
 // If the window is resized call the engine function to respond
 window.addEventListener("resize", function () {
     engine.resize();

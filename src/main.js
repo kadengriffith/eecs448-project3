@@ -9,6 +9,7 @@ let showPlayArea = false;
 let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window
 let loadTextures = false; // Only true when server-side
+let loadSounds = false; // Only true when server-side
 let gravityConst = -9.81; /* -9.81 */
 // Time - Match length >= 1
 let minutes = 5; // See time.js
@@ -32,11 +33,13 @@ let createScene = function () {
   scene.enablePhysics(gravityVector, physicsPlugin);
   // Load all the imposters necessary
   loadGameImposters(scene); // See objects_toRender.js
-  /* This is a function that is called on collision but I couldn't get it to work just yet
-  Player1.physicsImpostor.registerOnPhysicsCollide(Puck.physicsImpostor, function(main, collided) {
-    main.setLinearVelocity(new BABYLON.Vector3(0, 0, 0));
-  });
-  */
+  // This is our sound
+  if(loadSounds) {
+    let puckSound = new BABYLON.Sound("puckSound", "img/sounds/sound_puck.wav", scene);
+    Player1.physicsImpostor.registerOnPhysicsCollide(Puck.physicsImpostor, function(main, collided) {
+      puckSound.play();
+    });
+  }
   // End of createScene function
   return scene;
 };
@@ -45,6 +48,7 @@ let scene = createScene();
 if(enableTime && game_seconds === 0) { startSeconds(); } // See time.js
 // UPDATE LOOP
 engine.runRenderLoop(function () {
+  getTeam();
   if(!paused) { // Else -> present pause menu
     game_view();
     scene.activeCamera = Camera1;
@@ -108,7 +112,6 @@ engine.runRenderLoop(function () {
       Player1.position.x += player_speed;
     }
     //control ai
-	console.log(Player1.position);
     if(Puck.position.y > 1 && Puck.position.y < 3) {
       AIReturn();
     } else if(PuckStuckInLeftCorner()) {
@@ -169,7 +172,7 @@ engine.runRenderLoop(function () {
       Camera5.radius = 80;
     }
     if (key_ESC == true) {
-      paused = false; // Resume the game
+      menu_view(); // Resume the game
     }
   }
   // Display to the screen ~60fps
