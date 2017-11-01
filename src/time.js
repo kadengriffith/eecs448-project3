@@ -37,8 +37,8 @@ function getScore() {
   document.getElementsByClassName("score")[1].innerHTML = score_blue;
 }
 // Used to check if time is over @return true/false
-function isTimeUp() {
-  if (minutes*60 == game_seconds) {
+function timeIsUp() {
+  if ((minutes*60) < game_seconds) {
     return true;
   } else {
     return false;

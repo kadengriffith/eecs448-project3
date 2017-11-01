@@ -295,6 +295,13 @@
       <a onclick="javascript:menu_view();" class="textured_button"> BACK </a>
     </div>
   </div>
+  <!-- This is the game-over menu -->
+  <div class="view_screen" style="display:none;cursor:default;">
+    <div class="wrapper">
+      <h1 class="view_screen_title"> GAME OVER </h1><br>
+      <a onclick="javascript:window.location.reload();" class="textured_button"> PLAY AGAIN </a>
+    </div>
+  </div>
   <!-- This is the game -->
   <canvas id="view_GAME"></canvas>
   <script src="src/main.js" type="text/javascript"></script>
@@ -309,6 +316,7 @@
       document.getElementsByClassName('view_screen')[1].style.display = 'block';
       document.getElementsByClassName('view_screen')[2].style.display = 'none';
       document.getElementsByClassName('view_screen')[3].style.display = 'none';
+      document.getElementsByClassName('view_screen')[4].style.display = 'none';
       paused = false;
     }
   }
@@ -317,6 +325,7 @@
     document.getElementsByClassName('view_screen')[1].style.display = 'none';
     document.getElementsByClassName('view_screen')[2].style.display = 'none';
     document.getElementsByClassName('view_screen')[3].style.display = 'none';
+    document.getElementsByClassName('view_screen')[4].style.display = 'none';
   }
   function menu_view() {
     isGameActive = false;
@@ -329,12 +338,22 @@
     document.getElementsByClassName('view_screen')[1].style.display = 'none';
     document.getElementsByClassName('view_screen')[2].style.display = 'block';
     document.getElementsByClassName('view_screen')[3].style.display = 'none';
+    document.getElementsByClassName('view_screen')[4].style.display = 'none';
   }
   function instructions_view() {
     document.getElementsByClassName('view_screen')[0].style.display = 'none';
     document.getElementsByClassName('view_screen')[1].style.display = 'none';
     document.getElementsByClassName('view_screen')[2].style.display = 'none';
     document.getElementsByClassName('view_screen')[3].style.display = 'block';
+    document.getElementsByClassName('view_screen')[4].style.display = 'none';
+  }
+  function winloose_view() {
+    isGameActive = false;
+    document.getElementsByClassName('view_screen')[0].style.display = 'none';
+    document.getElementsByClassName('view_screen')[1].style.display = 'none';
+    document.getElementsByClassName('view_screen')[2].style.display = 'none';
+    document.getElementsByClassName('view_screen')[3].style.display = 'none';
+    document.getElementsByClassName('view_screen')[4].style.display = 'block';
   }
   </script>
 </body>
