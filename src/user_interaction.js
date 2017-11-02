@@ -77,7 +77,7 @@ function getTeam() {
     _color = "red";
     if(loadTextures) {
       let _material = new BABYLON.StandardMaterial("texture_player_red", scene);
-      _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_player_red.png", scene);
+      _material.diffuseTexture = new BABYLON.Texture("assets/textures/texture_player_red.png", scene);
       _material.specularColor = new BABYLON.Color3(1.0, 1.0, 1.0);
       Player1.material = _material;
     }
@@ -90,7 +90,7 @@ function getTeam() {
     _color = "green";
     if(loadTextures) {
       let _material = new BABYLON.StandardMaterial("texture_player_green", scene);
-      _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_player_green.png", scene);
+      _material.diffuseTexture = new BABYLON.Texture("assets/textures/texture_player_green.png", scene);
       _material.specularColor = new BABYLON.Color3(1.0, 1.0, 1.0);
       Player1.material = _material;
     }
@@ -103,7 +103,7 @@ function getTeam() {
     _color = "blue";
     if(loadTextures) {
       let _material = new BABYLON.StandardMaterial("texture_player_blue", scene);
-      _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_player_blue.png", scene);
+      _material.diffuseTexture = new BABYLON.Texture("assets/textures/texture_player_blue.png", scene);
       _material.specularColor = new BABYLON.Color3(1.0, 1.0, 1.0);
       Player1.material = _material;
     }
@@ -116,7 +116,7 @@ function getTeam() {
     _color = "yellow";
     if(loadTextures) {
       let _material = new BABYLON.StandardMaterial("texture_player_yellow", scene);
-      _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_player_yellow.png", scene);
+      _material.diffuseTexture = new BABYLON.Texture("assets/textures/texture_player_yellow.png", scene);
       _material.specularColor = new BABYLON.Color3(1.0, 1.0, 1.0);
       Player1.material = _material;
     }
@@ -127,11 +127,11 @@ function getTeam() {
 
 function loadGraphics(color) {
   let image_ = document.getElementsByClassName('scoreTitle')[0];
-  image_.style.backgroundImage = "url('img/font/score_title_" + color + ".png')";
+  image_.style.backgroundImage = "url('assets/fonts/score_title_" + color + ".png')";
   image_ = document.getElementsByClassName('scorePoints')[0];
-  image_.style.backgroundImage = "url('img/font/score_points_" + color + ".png')";
+  image_.style.backgroundImage = "url('assets/fonts/score_points_" + color + ".png')";
   image_ = document.getElementsByClassName('time')[0];
-  image_.style.backgroundImage = "url('img/font/score_time_" + color + ".png')";
+  image_.style.backgroundImage = "url('assets/fonts/score_time_" + color + ".png')";
 }
 // If the window is resized call the engine function to respond
 window.addEventListener("resize", function () {

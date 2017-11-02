@@ -5,7 +5,7 @@
 //  G A M E   S T A R T
 //########################
 // INITIAL SETTINGS
-let showPlayArea = false;
+let showPlayArea = true;
 let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window
 let loadTextures = false; // Only true when server-side
@@ -53,8 +53,12 @@ engine.runRenderLoop(function () {
     game_view();
     scene.activeCamera = Camera1;
     getScore(); // See time.js
-    // Reset for debugging
-    // if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
+    // Reset if players fall off the game
+    if(Player1.position.y < -20) {
+      dropPlayer("p1", "POSITION_INIT");
+    }else if(AI.position.y < -20) {
+      dropPlayer("ai", "POSITION_INIT");
+    }
     // Reset the puck if goal
     if(Puck.position.z > ground_length / 2 + puck_diameter) {
       // Blue
@@ -187,6 +191,18 @@ function dropPuck(loc) {
     Puck.position.x = 0;
     Puck.position.y = 10;
     Puck.position.z = 0;
+  }
+  return;
+}
+function dropPlayer(str, loc) {
+  if(loc === "POSITION_INIT") {
+    Puck.position.x = 0;
+    Puck.position.y = player_yoff;
+    if(str === "ai") {
+      Puck.position.z = -(ground_length / 2) - player_diameter;
+    }else if(str === "p1") {
+      Puck.position.z = (ground_length / 2) - player_diameter;
+    }
   }
   return;
 }

@@ -9,6 +9,13 @@
   <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
   <style>
+  /*
+  Color Palette:
+  red: #e74c3c;
+  blue: #2980b9;
+  green: #27ae60;
+  yellow: #f1c40f;
+  */
     html, body {
       overflow:hidden;
       margin:0;
@@ -67,7 +74,7 @@
       font-size:32px;
       text-decoration:none;
       color:#cbcbcb;
-      background-image:url('img/font/button_background.png');
+      background-image:url('assets/fonts/button_background.png');
       background-position:center;
       background-repeat:no-repeat;
       background-size:cover;
@@ -75,7 +82,7 @@
       box-shadow:3px 6px 8px rgba(0,0,0,0.4);
     }
     .textured_button:hover {
-      background-image:url('img/font/button_background_hover.png');
+      background-image:url('assets/fonts/button_background_hover.png');
       box-shadow:0px 2px 6px rgba(0,0,0,0.5);
       color:#cdd;
       transition:0.15s;
@@ -89,6 +96,11 @@
       width:30%;
       display:inline-block;
       min-height:100%;
+    }
+    .instruction {
+      background-color:#f4f4f4;
+      font-size:20px;
+      padding:0.5em;
     }
     #view_GAME {
       width:100%;
@@ -119,7 +131,7 @@
       margin-top:0px;
   		margin-right:auto;
     	margin-left:auto;
-  		background-image:url('img/font/score_title_green.png');
+  		background-image:url('assets/fonts/score_title_green.png');
       background-size:contain;
       background-position:center;
       border-bottom-left-radius:4px;
@@ -140,7 +152,7 @@
       font-weight:600;
       font-size:25px;
       color:#333;
-      background-image:url('img/font/score_points_green.png');
+      background-image:url('assets/fonts/score_points_green.png');
       background-size:contain;
       background-position:center;
       border-bottom-left-radius:4px;
@@ -159,7 +171,7 @@
     	margin-right:auto;
     	margin-left:auto;
       color:#333;
-      background-image:url('img/font/score_time_green.png');
+      background-image:url('assets/fonts/score_time_green.png');
       background-size:contain;
       background-position:center;
       border-bottom-left-radius:4px;
@@ -220,25 +232,19 @@
         <div class="gameTitle" style="text-shadow:0px 0px 20px #f1c40f;">A</div>
         <div class="gameTitle" style="text-shadow:0px 0px 20px #27ae60;">H</div>
         <div class="gameTitle" style="text-shadow:0px 0px 20px #2980b9;">!</div>
-        <!--img draggable="false" src="img/font/puckyeah_70.png" /-->
       </div>
       <!-- This is the landing page LEFT -->
       <div style="float:left;width:69%;display:inline-block;text-align:center;margin-top:10%;"">
-        <!-- NOPE
-        <input type="text" id="user" style="height:25px;width:189px;margin:0.5em;" placeholder="Username"><br>
-        <input type="text" id="password" style="height:25px;width:189px;margin:0.5em;" placeholder="Password"><br>
-        ...Don't have an <a href="#" style="height:25px;width:189px;text-decoration:none;color:#cdd;">account</a>?<br>
-        -->
         <h2 class="view_screen_title">Select a team "Team" you <br> think you can puck with...</h2><br>
         <select id="team_select" style="height:25px;width:189px;margin-top:1%;">
           <option value="null"><pre>Please select a team "Team"</pre></option>
-          <option value="RED" style="color=#e74c3c;">RED TEAM</option>
-          <option value="BLUE" style="color=#2980b9;">BLUE TEAM</option>
-          <option value="YELLOW" style="color=#f1c40f;">YELLOW TEAM</option>
-          <option value="GREEN" style="color=#27ae60;">GREEN TEAM</option>
+          <option value="RED">RED TEAM</option>
+          <option value="BLUE">BLUE TEAM</option>
+          <option value="YELLOW">YELLOW TEAM</option>
+          <option value="GREEN">GREEN TEAM</option>
         </select>
         <a onclick="javascript:game_view();" class="textured_button"> PLAY </a><br>
-        <!-- <a href="#" class="textured_button"> SETTINGS </a><br> -->
+        <!-- a onclick="javaascript:menu_view()" class="textured_button"> SETTINGS </a -->
         <div class="footer">
           © team "Team" 2017
           <a href="https://github.com/kadengriffith/eecs448-project3" target="new" style="float:right;margin-right:20px;text-decoration:none;color:#cdd;">GitHub</a>
@@ -257,7 +263,6 @@
         <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #2980b9;">A</div>
         <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #e74c3c;">R</div>
         <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #f1c40f;">D</div>
-        <!-- img draggable="false" style="margin-top:10%;" src="img/font/leader_35.png" -->
       </div>
     </div>
   </div>
@@ -288,10 +293,10 @@
   <div class="view_screen" style="display:none;cursor:default;">
     <div class="wrapper">
       <h1 class="view_screen_title"> INSTRUCTIONS </h1><br>
-      <div style="background-color:#f4f4f4;font-size:20px;padding:0.5em;"><h3 style="padding:0;line-height:25px;">Controls:</h3><br> W, A, S, D to move. </div>
-      <div style="background-color:#f4f4f4;font-size:20px;padding:0.5em;">SPACE to hit.</div>
-      <div style="background-color:#f4f4f4;font-size:20px;padding:0.5em;">ESC to pause/resume.</div>
-      <div style="background-color:#f4f4f4;font-size:20px;padding:0.5em;">P to place the puck back at center.</div>
+      <div class="instruction"><h3 style="padding:0;line-height:25px;">Controls:</h3><br> W, A, S, D to move. </div>
+      <div class="instruction"> SPACE to hit. </div>
+      <div class="instruction"> ESC to pause/resume. </div>
+      <div class="instruction"> P to place the puck back at center. </div>
       <a onclick="javascript:menu_view();" class="textured_button"> BACK </a>
     </div>
   </div>
@@ -302,7 +307,7 @@
   // ADD NEW SCREEN VIEWS HERE
   function game_view() {
     if(document.getElementById('team_select').value === "null") {
-      alert('Please choose a team "Team"');
+      alert('Please choose a team "Team" to start a game.');
       home_view();
     }else {
       document.getElementsByClassName('view_screen')[0].style.display = 'none';

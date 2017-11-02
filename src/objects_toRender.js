@@ -2,11 +2,9 @@
 // description : Helper functions to keep main.js less cluttered
 // last update : 10 25 2017
 //
-  let _color;
-  let Puck;
-  let Player1;
-  let AI;
-  let S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, Ground, Top;
+  let Puck, Player1, AI;
+  let _color; // Used to load textures
+  let S1, S2, S3, S4, S5, S6, S7, S8, Ground, /* Ground2, */ Top;
   let Light;
   let Camera1, Camera2, Camera3, Camera4, Camera5;
   // Player
@@ -55,6 +53,7 @@ function loadGameObjects(scene) {
   Ground.scaling.z = 1.5;
   Ground.scaling.y = 0.01;
   loadMaterial(Ground, "ground", loadTextures, false, [0.7, 0.7, 0.7], scene);
+  /* Not Final
   // This creates an infinite ground
   Ground2 = BABYLON.MeshBuilder.CreatePlane("ground2", playarea_height, scene);
   Ground2.rotation.x = Math.PI / 2;
@@ -62,6 +61,7 @@ function loadGameObjects(scene) {
   Ground2.scaling = new BABYLON.Vector3(800, 800, 1);
   Ground2.showBoundingBox = true;
   loadMaterial(Ground2, "ground2", false, false, [0.2, 0.2, 0.2], scene);
+  */
   // This creates the top of the play area
   Top = BABYLON.Mesh.CreateBox("top", 2 * goal_width, scene);
   Top.position.y = playarea_height + ground_yoff;
@@ -87,24 +87,24 @@ function loadGameObjects(scene) {
   // This creates the boundaries of our play area but something is wrong
   // Appears as RIGHT bounded box
   S1 = BABYLON.MeshBuilder.CreatePlane("side1", playarea_height, scene);
-  S1.scaling = new BABYLON.Vector3(ground_length, playarea_height, ground_length);
+  S1.scaling = new BABYLON.Vector3(ground_length, playarea_height, 1);
   S1.rotation.y = Math.PI / 2;
   S1.position.x = (-ground_length / 3);
   S1.position.y = playarea_yoff + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S1.showBoundingBox = true; } else {
-    loadMaterial(S1, "edgeGrad2", loadTextures, loadTextures, [0, 0, 0], scene);
+    loadMaterial(S1, "sides", loadTextures, loadTextures, [0, 0, 0], scene);
     // S1.material.alpha = 0.8;
   }
   // Appears as LEFT bounded box
   S2 = BABYLON.MeshBuilder.CreatePlane("side2", playarea_height, scene);
-  S2.scaling = new BABYLON.Vector3(ground_length, playarea_height, ground_length);
+  S2.scaling = new BABYLON.Vector3(ground_length, playarea_height, 1);
   S2.rotation.y = Math.PI / 2;
   S2.position.x = ground_length / 3;
   S2.position.y = playarea_yoff + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S2.showBoundingBox = true; } else {
-    loadMaterial(S2, "edgeGrad2", loadTextures, loadTextures, [1.0, 1.0, 1.0], scene);
+    loadMaterial(S2, "sides", loadTextures, loadTextures, [1.0, 1.0, 1.0], scene);
     // S2.material.alpha = 0.8;
   }
   // Appears as BACK LEFT bounded box
@@ -130,21 +130,21 @@ function loadGameObjects(scene) {
   }
   // Appears as BACK CENTER bounded box
   S5 = BABYLON.MeshBuilder.CreatePlane("side5", playarea_height, scene);
-  S5.scaling = new BABYLON.Vector3(goal_width, playarea_height - 1.32, 1);
+  S5.scaling = new BABYLON.Vector3(goal_width, playarea_height, 1);
   S5.position.z = (-ground_length / 2);
-  S5.position.y = goal_height + (playarea_height / 2);
+  S5.position.y = (goal_height / 2) + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S5.showBoundingBox = true; } else {
-    loadMaterial(S5, "goalCenterBlue", loadTextures, loadTextures, [0.5, 0.5, 0.5], scene);
+    loadMaterial(S5, "goals", loadTextures, loadTextures, [0.5, 0.5, 0.5], scene);
   }
   // Appears as CLOSEST CENTER bounded box
   S6 = BABYLON.MeshBuilder.CreatePlane("side6", playarea_height, scene);
-  S6.scaling = new BABYLON.Vector3(goal_width, playarea_height - 1.32, 1);
+  S6.scaling = new BABYLON.Vector3(goal_width, playarea_height, 1);
   S6.position.z = ground_length / 2;
-  S6.position.y = goal_height + (playarea_height / 2);
+  S6.position.y = (goal_height / 2) + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S6.showBoundingBox = true; } else {
-    loadMaterial(S6, "goalCenterRed", loadTextures, loadTextures, [1.0, 1.0, 1.0], scene);
+    loadMaterial(S6, "goals", loadTextures, loadTextures, [1.0, 1.0, 1.0], scene);
     S6.material.alpha = playarea_localOpacity;
   }
   // Appears as BACK RIGHT bounded box
@@ -218,7 +218,7 @@ function loadMaterial(object /*BABYLON mesh*/, textureid /*title of the texture*
     if(hasAlpha) {
     	_material.diffuseTexture.hasAlpha = true;
     	_material.opacityTexture = new BABYLON.Texture("img/textures/texture_" + textureid + ".png", scene);
-    	_material.bumpTexture = new BABYLON.Texture("img/textures/texture_" + textureid + "BUMP.png", scene);
+    	// _material.bumpTexture = new BABYLON.Texture("img/textures/texture_" + textureid + ".png", scene);
     	_material.ambientColor = new BABYLON.Color3(default_color[0], default_color[1], default_color[2]);
       _material.backFaceCulling = false;
     }else {
