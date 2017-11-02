@@ -38,7 +38,7 @@ function getScore() {
 }
 // Used to check if time is over @return true/false
 function timeIsUp() {
-  if ((minutes*60) < game_seconds) {
+  if (minutes == 0 && seconds == 0) {
     return true;
   } else {
     return false;

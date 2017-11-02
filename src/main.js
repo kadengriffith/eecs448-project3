@@ -12,7 +12,7 @@ let loadTextures = false; // Only true when server-side
 let loadSounds = false; // Only true when server-side
 let gravityConst = -9.81; /* -9.81 */
 // Time - Match length >= 1
-let minutes = 1; // See time.js
+let minutes = 5; // See time.js
 document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
 // @END INITIAL SETTINGS
 // CONTEXT & ENGINE
@@ -55,7 +55,7 @@ engine.runRenderLoop(function () {
     getScore(); // See time.js
     if (timeIsUp()) {
       // Switch to win/loose (game over) screen
-      //winloose_view();
+      winloose_view();
     }
     // Reset for debugging
     // if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
