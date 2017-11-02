@@ -137,9 +137,9 @@ engine.runRenderLoop(function () {
           AI.position.z += ai_speed;
         }
       } else {
-		AIBack();
-	  }
-	  AIFollowPuckX();
+    		AIBack();
+    	}
+	    AIFollowPuckX();
     }
   }else {
     // Enter camera sequence
