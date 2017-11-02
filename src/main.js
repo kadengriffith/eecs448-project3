@@ -55,7 +55,7 @@ engine.runRenderLoop(function () {
     getScore(); // See time.js
     if (timeIsUp()) {
       // Switch to win/loose (game over) screen
-      winloose_view();
+      //winloose_view();
     }
     // Reset for debugging
     // if(Player1.position.y < -20 || AI.position.y < -20) { window.location.reload(); }
