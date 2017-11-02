@@ -5,7 +5,7 @@
 //  G A M E   S T A R T
 //########################
 // INITIAL SETTINGS
-let showPlayArea = true;
+let showPlayArea = false;
 let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window
 let loadTextures = false; // Only true when server-side
@@ -23,7 +23,7 @@ let engine = new BABYLON.Engine(game, true);
 let createScene = function () {
   // Scene Creation
   let scene = new BABYLON.Scene(engine);
-  scene.clearColor = new BABYLON.Color3(240, 240, 240);
+  scene.clearColor = new BABYLON.Color3(170, 170, 170);
   // Information for the physics engine
   let gravityVector = new BABYLON.Vector3(0,-9.81, 0);
   let physicsPlugin = new BABYLON.CannonJSPlugin();

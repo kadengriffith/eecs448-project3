@@ -11,13 +11,23 @@ function startSeconds() {
     if(!paused) {
       if(seconds % 60 === 0) {
         seconds = 0;
-        if(minutes > 0) { minutes--; } else {
-          return;
-        }
+        if(minutes > -1) { minutes--; }
       }
-      if(minutes < 0 && seconds < 1) {
+      if(minutes === -1 && seconds < 1) {
+        // The time is up
         document.getElementsByClassName("time")[0].innerHTML = "0:00";
-        if(reloadOnTimeEnd) { window.location.reload(); }
+        if(reloadOnTimeEnd) {
+          window.location.reload();
+        }else {
+          if(score_red > score_ai) {
+            document.getElementById("WINORLOSE").innerHTML += "You Won!<br><br>";
+            // This is where we access the server and add the score
+            document.getElementById("WINORLOSE").innerHTML += 'Your score has been added to the ' + _color.toLowerCase() + ' team "Team."';
+          }else {
+            document.getElementById("WINORLOSE").innerHTML += "You Lose!"
+          }
+          winlose_view();
+        }
       }else {
         calculated_sec = 59 - seconds;
         if(calculated_sec > 9) {
@@ -34,13 +44,5 @@ function startSeconds() {
 // Used for displaying score to HUD
 function getScore() {
   document.getElementsByClassName("score")[0].innerHTML = score_red;
-  document.getElementsByClassName("score")[1].innerHTML = score_blue;
-}
-// Used to check if time is over @return true/false
-function timeIsUp() {
-  if (minutes == 0 && seconds == 0) {
-    return true;
-  } else {
-    return false;
-  }
+  document.getElementsByClassName("score")[1].innerHTML = score_ai;
 }

@@ -38,7 +38,7 @@
   let goal_height = 0.16; // ~Half puck_height
   let goal_width = ground_length / 3;
   // Scores
-  let score_blue = 0;
+  let score_ai = 0;
   let score_red = 0;
 //
 // Used in scene creation
