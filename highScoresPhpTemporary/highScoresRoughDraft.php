@@ -16,10 +16,10 @@
 		//add return to post game or main game page?
 		exit();
 	}
-	
-	if(strlen($teamToUpdate) == 0)//should also add a check to see if its one of the 4 teams... (add later)
+	//might need to change the single quotes to double quotes for the team colors
+	if($teamToUpdate != ( 'redTeam' || 'blueTeam' || 'yellowTeam' || 'greenTeam' ))//should also add a check to see if its one of the 4 teams... (add later)
 	{
-		echo "Something went wrong, Try again later.";
+		echo "Something went wrong with the name variable, Try again later.";
 		//add return to post game or main game page?
 		exit();
 	}
@@ -31,7 +31,7 @@
 		exit();
 	}
 	//the line below will be to check how many points the team already has.---
-	//$query = "SELECT Name, CountryCode FROM City ORDER by ID DESC LIMIT 50,5"; (still gotta double check how to do this part)
+	//$query = /*still not sure */
 	
 	//<do math here (add old score to new one)>
 	$pointsToAdd = $pointsToAdd + $oldPoints;
