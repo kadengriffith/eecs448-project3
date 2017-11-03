@@ -22,7 +22,7 @@ function startSeconds() {
           if(score_red > score_ai) {
             document.getElementById("WINORLOSE").innerHTML += "You Won!<br><br>";
             // This is where we access the server and add the score
-            
+			location.href = ("src/incrementWins.php?color=" + _color;
           }else {
             document.getElementById("WINORLOSE").innerHTML += "You Lose!"
           }

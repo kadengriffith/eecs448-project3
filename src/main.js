@@ -12,7 +12,7 @@ let loadTextures = false; // Only true when server-side
 let loadSounds = false; // Only true when server-side
 let gravityConst = -9.81; /* -9.81 */
 // Time - Match length >= 1
-let minutes = 5; // See time.js
+let minutes = 1; // See time.js
 document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
 // @END INITIAL SETTINGS
 // CONTEXT & ENGINE
