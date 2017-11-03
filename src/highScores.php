@@ -3,10 +3,11 @@ CREATE TABLE Teams ( team_id int NOT NULL AUTO_INCREMENT, team_color text NOT NU
 Update: table is live on blaines MYSQL server. "test" is the data base. (use test); -->
 <?php
 
-	$teamToUpdate = $_POST["teamColor"];
+$teamToUpdate = $_GET["teamColor"];
+$pointsToAdd = $_GET["points"];
 
-	$pointsToAdd = $_POST["points"];
-	
+  echo $teamToUpdate . " team<br>"; // REMOVE
+  echo $pointsToAdd . " point"; // REMOVE
 	 //eventually this will be kadens server
 	$data_base = new mysqli("mysql.eecs.ku.edu", "bedmondson", 'P@$$word.123', "test");
 
