@@ -22,7 +22,9 @@ function startSeconds() {
           if(score_red > score_ai) {
             document.getElementById("WINORLOSE").innerHTML += "You Won!<br><br>";
             // This is where we access the server and add the score
-			location.href = ("src/incrementWins.php?color=" + _color;
+			location.href = ("src/incrementWins.php?color=" + _color);
+            //document.getElementById("WINORLOSE").innerHTML += 'Your score has been added to the ' + _color.toLowerCase() + ' team "Team."';
+            //submitScore(_color.toLowerCase(), 1);
           }else {
             document.getElementById("WINORLOSE").innerHTML += "You Lose!"
           }
@@ -45,4 +47,12 @@ function startSeconds() {
 function getScore() {
   document.getElementsByClassName("score")[0].innerHTML = score_red;
   document.getElementsByClassName("score")[1].innerHTML = score_ai;
+}
+// Used to pass values of winning team to php file
+function submitScore(tc, p) {
+  var teamColor = tc;
+  var points  = p;
+  if (points > 0) {
+      // window.location.href = "src/highScores.php?teamColor=" + teamColor + "&points=" + points;
+  }
 }
