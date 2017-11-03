@@ -31,12 +31,13 @@
 		exit();
 	}
 	//the line below will be to check how many points the team already has.---
-	//$query = "SELECT Name, CountryCode FROM City ORDER by ID DESC LIMIT 50,5";
+	//$query = "SELECT Name, CountryCode FROM City ORDER by ID DESC LIMIT 50,5"; (still gotta double check how to do this part)
 	
 	//<do math here (add old score to new one)>
+	$pointsToAdd = $pointsToAdd + $oldPoints;
 	
-	//the line below will be to update the score---
-	//$insert = "INSERT INTO Posts (content, author_id) VALUES ('" . $post . "', (SELECT user_id FROM Users WHERE username='" . $username . "'))";
+	//the line below will be to update the score--- (its not tested yet)
+	$insert = "INSERT INTO Teams (NULL<><><><><><><><>) VALUES ('" . $pointsToAdd . "', (SELECT team_color FROM Teams WHERE team_color='" . $teamToUpdate . "'))";
 	
 	
 	
