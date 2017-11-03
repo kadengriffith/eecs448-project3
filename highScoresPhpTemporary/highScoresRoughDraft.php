@@ -32,9 +32,9 @@
 	}
 	//the line below will be to check how many points the team already has.---
 	//$query = /*still not sure */
-	
-	//<do math here (add old score to new one)>
-	$pointsToAdd = $pointsToAdd + $oldPoints;
+	//$oldPoinst = what ever the query returns for points
+	//do math here (add old score to new one)
+	$oldPoints = $pointsToAdd + $oldPoints;
 	
 	//the line below will be to update the score--- (its not tested yet)
 	$insert = "INSERT INTO Teams (NULL<><><><><><><><>) VALUES ('" . $pointsToAdd . "', (SELECT team_color FROM Teams WHERE team_color='" . $teamToUpdate . "'))";
