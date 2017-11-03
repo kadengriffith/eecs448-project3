@@ -1,16 +1,13 @@
-//getting the template ready
-//Line used to create the table below... (on my EECS MYSQL server)
+//The line used to create the table is below... (created on blaines EECS MYSQL server)
 //CREATE TABLE Teams ( team_id int NOT NULL AUTO_INCREMENT, team_color text NOT NULL, team_score int NOT NULL, team_wins int NOT NULL, team_losses int NOT NULL, PRIMARY KEY (team_id) );
 //Update: table is live on blaines MYSQL server. "test" is the data base. (use test);
 <?php
-
-//might need to make this the 
 
 	$teamToUpdate = $_POST["teamColor"];
 	
 	$pointsToAdd = $_POST["pointsAdd"];
 	
-	//eventually this will be kadens server
+	 //eventually this will be kadens server
 	$data_base = new mysqli("mysql.eecs.ku.edu", "bedmondson", 'P@$$word.123', "test");
 	
 	if($data_base->connect_errno)
@@ -20,7 +17,7 @@
 		exit();
 	}
 	
-	if(strlen($teamToUpdate) == 0)
+	if(strlen($teamToUpdate) == 0)//should also add a check to see if its one of the 4 teams... (add later)
 	{
 		echo "Something went wrong, Try again later.";
 		//add return to post game or main game page?
@@ -33,6 +30,21 @@
 		//add return to post game or main game page?
 		exit();
 	}
-
-
+	//the line below will be to check how many points the team already has.---
+	//$query = "SELECT Name, CountryCode FROM City ORDER by ID DESC LIMIT 50,5";
+	
+	//<do math here (add old score to new one)>
+	
+	//the line below will be to update the score---
+	//$insert = "INSERT INTO Posts (content, author_id) VALUES ('" . $post . "', (SELECT user_id FROM Users WHERE username='" . $username . "'))";
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 ?>
