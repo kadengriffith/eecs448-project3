@@ -263,6 +263,25 @@
         <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #2980b9;">A</div>
         <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #e74c3c;">R</div>
         <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #f1c40f;">D</div>
+		<?php
+			$leaderboard = new mysqli("mysql.eecs.ku.edu", "mtaylor", 'P@$$word123', "mtaylor");
+			if($leaderboard->connect_errno) {
+				printf("Connetion failed: %s\n", $leaderboard->connect_error);
+				exit();
+			}
+			$sort = "SELECT * FROM Leaderboard ORDER BY wins DESC";
+			$result = $leaderboard->query($sort);
+			while($row = $result->fetch_assoc()) {
+				echo "<div>" . $row["color"] . ": " . $row["wins"];
+				
+				if($row["wins"] == 1) {
+					echo " win</div>";
+				} else {
+					echo " wins</div>";
+				}
+			}
+			$leaderboard->close();
+		?>
       </div>
     </div>
   </div>

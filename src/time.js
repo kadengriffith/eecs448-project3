@@ -52,6 +52,6 @@ function submitScore(tc, p) {
   var teamColor = tc;
   var points  = p;
   if (points > 0) {
-      window.location.href = "src/highScores.php?teamColor=" + teamColor + "&points=" + points;
+      // window.location.href = "src/highScores.php?teamColor=" + teamColor + "&points=" + points;
   }
 }
