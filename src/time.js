@@ -4,6 +4,11 @@
 let game_seconds = 0;
 let seconds = 0;
 let paused = true;
+
+/**
+ * Initializes timer and controls remaining time during game. Calls proper functions once time has run out
+ */
+
 function startSeconds() {
   seconds = 0;
   setInterval(function(){
@@ -48,7 +53,11 @@ function startSeconds() {
     game_seconds++;
   }, 1000 /* One Second */);
 }
-// Used for displaying score to HUD
+
+/**
+ * Displays player score and ai score to HUD during game
+ */
+
 function getScore() {
   document.getElementsByClassName("score")[0].innerHTML = score_red;
   document.getElementsByClassName("score")[1].innerHTML = score_ai;

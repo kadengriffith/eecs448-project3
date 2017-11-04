@@ -14,6 +14,12 @@ window.addEventListener("keydown", onKeyDown, false);
 window.addEventListener("keyup", onKeyUp, false);
 // ADDITIONAL FUNCTIONS
 // Controlling Player1
+
+/**
+ * Detects when specified keys are pressed and performs specified action
+ * @param {event} event thing that should happen when button is pressed
+ */
+
 function onKeyDown(event) {
   let key_Code = event.keyCode;
   if(key_Code === 0) { key_Code = event.charCode; }
@@ -42,6 +48,11 @@ function onKeyDown(event) {
   }
 }
 
+/**
+ * Detects when specified keys are released and performs specified action
+ * @param {event} event thing that should happen when button is released
+ */
+
 function onKeyUp(event) {
   let key_Code = event.keyCode;
   switch (key_Code) {
@@ -69,6 +80,11 @@ function onKeyUp(event) {
   }
 }
 // Manipulates the team label on the HUD
+
+/**
+ * Reads info from menu regarding team selection, sets fields accordingly (fields including puck color, scoreboard color, scoreboard text)
+ */
+
 function getTeam() {
   let team = document.getElementById('team_select').value;
   if(team === "RED") {
@@ -124,6 +140,11 @@ function getTeam() {
     loadGraphics(_color);
   }
 }
+
+/**
+ * Pulls pictures from server and sets puck color, scoreboard color accordingly
+ * @param {string} color color of the team the player chose
+ */
 
 function loadGraphics(color) {
   let image_ = document.getElementsByClassName('scoreTitle')[0];

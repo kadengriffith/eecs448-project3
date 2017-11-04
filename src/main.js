@@ -20,6 +20,11 @@ let game = document.getElementById('view_GAME');
 let engine = new BABYLON.Engine(game, true);
 // @END CONTEXT & ENGINE
 // SCENE INSTANTIATION
+
+/**
+ * Utilizes babylon.js library to instantiate a scene object
+ */
+
 let createScene = function () {
   // Scene Creation
   let scene = new BABYLON.Scene(engine);
@@ -47,6 +52,11 @@ let scene = createScene();
 // @END SCENE INSTANTIATION
 if(enableTime && game_seconds === 0) { startSeconds(); } // See time.js
 // UPDATE LOOP
+
+/**
+ * Maniuplates scene object to change camera position, puck, player, ai positions
+ */
+
 engine.runRenderLoop(function () {
   getTeam();
   if(!paused) { // Else -> present pause menu
@@ -186,6 +196,12 @@ engine.runRenderLoop(function () {
 //########################
 //  G A M E   E N D  :(
 //########################
+
+/** 
+ * Moves puck to specified location, to be used when puck goes somewhere it shouldn't
+ * @param {Vector} loc integer vector representing the desired location
+ */
+
 function dropPuck(loc) {
   if(loc === "CENTER") {
     Puck.position.x = 0;
@@ -194,6 +210,13 @@ function dropPuck(loc) {
   }
   return;
 }
+
+/**
+ * Places a player in the desired location, used to begin game or reset game after point is scored
+ * @param {string} str string designating if the player to be placed is the ai or the user
+ * @param {Vector} loc integer vector representing the desired location
+ */
+
 function dropPlayer(str, loc) {
   if(loc === "POSITION_INIT") {
     Puck.position.x = 0;

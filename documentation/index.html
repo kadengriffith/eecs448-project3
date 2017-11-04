@@ -1,0 +1,1696 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+  <link href='assets/split.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'></h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#aireturn'
+                  class="">
+                  AIReturn
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#aifollowpuckx'
+                  class="">
+                  AIFollowPuckX
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#puckonblueside'
+                  class="">
+                  PuckOnBlueSide
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#playeronblueside'
+                  class="">
+                  PlayerOnBlueSide
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#puckbehindai'
+                  class="">
+                  PuckBehindAI
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#playerhittingback'
+                  class="">
+                  PlayerHittingBack
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#playerhittingleft'
+                  class="">
+                  PlayerHittingLeft
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#playerhittingright'
+                  class="">
+                  PlayerHittingRight
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#aiback'
+                  class="">
+                  AIBack
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#puckstuckinleftcorner'
+                  class="">
+                  PuckStuckInLeftCorner
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#puckstuckinrightcorner'
+                  class="">
+                  PuckStuckInRightCorner
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#update'
+                  class="">
+                  update
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createscene'
+                  class="">
+                  createScene
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#runrenderloop'
+                  class="">
+                  runRenderLoop
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#droppuck'
+                  class="">
+                  dropPuck
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#dropplayer'
+                  class="">
+                  dropPlayer
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loadgameobjects'
+                  class="">
+                  loadGameObjects
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loadgameimposters'
+                  class="">
+                  loadGameImposters
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loadmaterial'
+                  class="">
+                  loadMaterial
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#startseconds'
+                  class="">
+                  startSeconds
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getscore'
+                  class="">
+                  getScore
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#onkeydown'
+                  class="">
+                  onKeyDown
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#onkeyup'
+                  class="">
+                  onKeyUp
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getteam'
+                  class="">
+                  getTeam
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loadgraphics'
+                  class="">
+                  loadGraphics
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='aireturn'>
+      AIReturn
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Moves ai towards its starting position</p>
+
+
+  <div class='pre p1 fill-light mt0'>new AIReturn()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='aifollowpuckx'>
+      AIFollowPuckX
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Moves ai's horizontal location towards puck's horizontal location</p>
+
+
+  <div class='pre p1 fill-light mt0'>new AIFollowPuckX()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='puckonblueside'>
+      PuckOnBlueSide
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if puck is on ai's side</p>
+
+
+  <div class='pre p1 fill-light mt0'>new PuckOnBlueSide(): bool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>bool</code>:
+        true if puck is on ai's side, false if not
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='playeronblueside'>
+      PlayerOnBlueSide
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if user is on ai's side</p>
+
+
+  <div class='pre p1 fill-light mt0'>new PlayerOnBlueSide(): bool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>bool</code>:
+        true if player is on ai's side, false if not
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='puckbehindai'>
+      PuckBehindAI
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if puck is behind the ai</p>
+
+
+  <div class='pre p1 fill-light mt0'>new PuckBehindAI(): bool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>bool</code>:
+        true if puck is behind the ai, false if not
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='playerhittingback'>
+      PlayerHittingBack
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if the user is about to hit the back wall (preventing collisions or player falling off play area)</p>
+
+
+  <div class='pre p1 fill-light mt0'>new PlayerHittingBack(): bool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>bool</code>:
+        true if player is about to hit the back wall, false if not
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='playerhittingleft'>
+      PlayerHittingLeft
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if the user is about to hit the left wall (preventing collisions or player falling off play area)</p>
+
+
+  <div class='pre p1 fill-light mt0'>new PlayerHittingLeft(): bool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>bool</code>:
+        true if player is about to hit the left wall, false if not
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='playerhittingright'>
+      PlayerHittingRight
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if the user is about to hit the right wall (preventing collisions or player falling off play area)</p>
+
+
+  <div class='pre p1 fill-light mt0'>new PlayerHittingRight(): bool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>bool</code>:
+        true if player is about to hit the right wall, false if not
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='aiback'>
+      AIBack
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Prevents ai from going onto user's side</p>
+
+
+  <div class='pre p1 fill-light mt0'>new AIBack()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='puckstuckinleftcorner'>
+      PuckStuckInLeftCorner
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if the puck is stuck in the back left corner (if the ai has trapped it there)</p>
+
+
+  <div class='pre p1 fill-light mt0'>new PuckStuckInLeftCorner(): bool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>bool</code>:
+        true if the puck is there, false if not
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='puckstuckinrightcorner'>
+      PuckStuckInRightCorner
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if the puck is stuck in the back right corner (if the ai has trapped it there)</p>
+
+
+  <div class='pre p1 fill-light mt0'>new PuckStuckInRightCorner(): bool</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>bool</code>:
+        true if the puck is there, false if not
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='update'>
+      update
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Reads color information from sliders in the DOM, setting player's color to any rgb possibility (feature still in development)</p>
+
+
+  <div class='pre p1 fill-light mt0'>update()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createscene'>
+      createScene
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Utilizes babylon.js library to instantiate a scene object</p>
+
+
+  <div class='pre p1 fill-light mt0'>createScene()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='runrenderloop'>
+      runRenderLoop
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Maniuplates scene object to change camera position, puck, player, ai positions</p>
+
+
+  <div class='pre p1 fill-light mt0'>runRenderLoop</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='droppuck'>
+      dropPuck
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Moves puck to specified location, to be used when puck goes somewhere it shouldn't</p>
+
+
+  <div class='pre p1 fill-light mt0'>dropPuck(loc: Vector)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>loc</span> <code class='quiet'>(Vector)</code>
+	    integer vector representing the desired location
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='dropplayer'>
+      dropPlayer
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Places a player in the desired location, used to begin game or reset game after point is scored</p>
+
+
+  <div class='pre p1 fill-light mt0'>dropPlayer(str: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, loc: Vector)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>str</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    string designating if the player to be placed is the ai or the user
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>loc</span> <code class='quiet'>(Vector)</code>
+	    integer vector representing the desired location
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loadgameobjects'>
+      loadGameObjects
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gives each shape and surface is appropriate size, color, position. Controls lighting and camera placement.</p>
+
+
+  <div class='pre p1 fill-light mt0'>loadGameObjects(scene: scene)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>scene</span> <code class='quiet'>(scene)</code>
+	    scene object containing all gameplay elements
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loadgameimposters'>
+      loadGameImposters
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Creates hitboxes for each object and wall, enables use of physics engine. Gives puck and players their physical properties</p>
+
+
+  <div class='pre p1 fill-light mt0'>loadGameImposters(scene: scene)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>scene</span> <code class='quiet'>(scene)</code>
+	    scene object containing all gameplay elements
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loadmaterial'>
+      loadMaterial
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Pulls texture from server, or from parameters, and applies it to specified object</p>
+
+
+  <div class='pre p1 fill-light mt0'>loadMaterial(object: mesh, textureid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, texture: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, hasAlpha: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, default_color: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>, scene: scene)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>object</span> <code class='quiet'>(mesh)</code>
+	    object to be textured
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>textureid</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    name of texture
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>texture</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+	    true if texture exists, false if not
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>hasAlpha</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+	    true if texture is at all transparent, false if not
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>default_color</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>)</code>
+	    array representing default color info in rgb format
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>scene</span> <code class='quiet'>(scene)</code>
+	    scene object containing all gameplay elements
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='startseconds'>
+      startSeconds
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Initializes timer and controls remaining time during game. Calls proper functions once time has run out</p>
+
+
+  <div class='pre p1 fill-light mt0'>startSeconds()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getscore'>
+      getScore
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Displays player score and ai score to HUD during game</p>
+
+
+  <div class='pre p1 fill-light mt0'>getScore()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='onkeydown'>
+      onKeyDown
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Detects when specified keys are pressed and performs specified action</p>
+
+
+  <div class='pre p1 fill-light mt0'>onKeyDown(event: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">event</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>event</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">event</a>)</code>
+	    thing that should happen when button is pressed
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='onkeyup'>
+      onKeyUp
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Detects when specified keys are released and performs specified action</p>
+
+
+  <div class='pre p1 fill-light mt0'>onKeyUp(event: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">event</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>event</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">event</a>)</code>
+	    thing that should happen when button is released
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getteam'>
+      getTeam
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Reads info from menu regarding team selection, sets fields accordingly (fields including puck color, scoreboard color, scoreboard text)</p>
+
+
+  <div class='pre p1 fill-light mt0'>getTeam()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loadgraphics'>
+      loadGraphics
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Pulls pictures from server and sets puck color, scoreboard color accordingly</p>
+
+
+  <div class='pre p1 fill-light mt0'>loadGraphics(color: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    color of the team the player chose
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
