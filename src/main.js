@@ -8,11 +8,11 @@
 let showPlayArea = false;
 let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window
-let loadTextures = false; // Only true when server-side
+let loadTextures = true; // Only true when server-side
 let loadSounds = false; // Only true when server-side
 let gravityConst = -9.81; /* -9.81 */
 // Time - Match length >= 1
-let minutes = 1; // See time.js
+let minutes = 5; // See time.js
 document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
 // @END INITIAL SETTINGS
 // CONTEXT & ENGINE
@@ -23,7 +23,7 @@ let engine = new BABYLON.Engine(game, true);
 let createScene = function () {
   // Scene Creation
   let scene = new BABYLON.Scene(engine);
-  scene.clearColor = new BABYLON.Color3(170, 170, 170);
+  scene.clearColor = new BABYLON.Color3(100, 100, 100);
   // Information for the physics engine
   let gravityVector = new BABYLON.Vector3(0,-9.81, 0);
   let physicsPlugin = new BABYLON.CannonJSPlugin();
@@ -35,7 +35,7 @@ let createScene = function () {
   loadGameImposters(scene); // See objects_toRender.js
   // This is our sound
   if(loadSounds) {
-    let puckSound = new BABYLON.Sound("puckSound", "img/sounds/sound_puck.wav", scene);
+    let puckSound = new BABYLON.Sound("puckSound", "assets/sounds/sound_puck.wav", scene);
     Player1.physicsImpostor.registerOnPhysicsCollide(Puck.physicsImpostor, function(main, collided) {
       puckSound.play();
     });
@@ -66,7 +66,7 @@ engine.runRenderLoop(function () {
   	  dropPuck("CENTER");
       AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
       Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
-      setTimeout(score_blue++, 2000);
+      setTimeout(score_ai++, 2000);
     }
     if(Puck.position.z < -(ground_length / 2) - puck_diameter) {
       // Red

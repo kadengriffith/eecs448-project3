@@ -14,15 +14,15 @@
   let player_polygons = 50;
   let player_speed = 0.33;
   let ai_speed = 0.33;
-  let player_mass = 2700;
-  let player_friction = 0.5;
-  let player_restitution = 0.15;
+  let player_mass = 2800;
+  let player_friction = 0.002;
+  let player_restitution = 0;
   // Puck
   let puck_height = 0.3;
   let puck_diameter = 3.2;
   let puck_yoff = puck_height / 2;
   let puck_polygons = 50;
-  let puck_mass = 4;
+  let puck_mass = 3.22;
   let puck_friction = 0;
   let puck_restitution = 1;
   // Ground
@@ -33,7 +33,7 @@
   let playarea_height = 25;
   let playarea_yoff = -0.5;
   let playarea_restitution = 0.7;
-  let playarea_localOpacity = 0.06;
+  let playarea_localOpacity = 1.0;
   // Goal
   let goal_height = 0.16; // ~Half puck_height
   let goal_width = ground_length / 3;
@@ -48,7 +48,7 @@ function loadGameObjects(scene) {
   Light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
   Light.intensity = 0.9;
   // This creates the play area
-  Ground = BABYLON.Mesh.CreateBox("ground", 2 * goal_width, scene);
+  Ground = BABYLON.Mesh.CreateBox("ground", 2 * goal_width + 0.1, scene);
   Ground.position.y = ground_yoff;
   Ground.scaling.z = 1.5;
   Ground.scaling.y = 0.01;
@@ -78,7 +78,7 @@ function loadGameObjects(scene) {
   Player1 = BABYLON.Mesh.CreateCylinder("player1", player_height, player_diameter, player_diameter, player_polygons, 1, scene);
   Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
   // Set the player material
-  loadMaterial(Player1, "player_general", loadTextures, false, [1.0, 1.0, 1.0], scene);
+  loadMaterial(Player1, "playerOnLoad", loadTextures, false, [1.0, 1.0, 1.0], scene);
   // This creates the opposing player
   AI = BABYLON.Mesh.CreateCylinder("ai", player_height, player_diameter, player_diameter, player_polygons, 1, scene);
   AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
@@ -113,6 +113,7 @@ function loadGameObjects(scene) {
   S3.position.x = goal_width / 2 + goal_width / 4;
   S3.position.z = (-ground_length / 2);
   S3.position.y = playarea_yoff + (playarea_height / 2);
+  S3.rotation.y = Math.PI;
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S3.showBoundingBox = true; } else {
     loadMaterial(S3, "goalLeft", loadTextures, loadTextures, [1.0, 1.0, 1.0], scene);
@@ -133,6 +134,7 @@ function loadGameObjects(scene) {
   S5.scaling = new BABYLON.Vector3(goal_width, playarea_height, 1);
   S5.position.z = (-ground_length / 2);
   S5.position.y = (goal_height / 2) + (playarea_height / 2);
+  S5.rotation.y = Math.PI;
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S5.showBoundingBox = true; } else {
     loadMaterial(S5, "goals", loadTextures, loadTextures, [0.5, 0.5, 0.5], scene);
@@ -153,6 +155,7 @@ function loadGameObjects(scene) {
   S7.position.x = -(goal_width / 2 + goal_width / 4);
   S7.position.z = (-ground_length / 2);
   S7.position.y = playarea_yoff + (playarea_height / 2);
+  S7.rotation.y = Math.PI;
   // Use showPlayArea to view the boundaries
   if(showPlayArea) { S7.showBoundingBox = true; } else {
     loadMaterial(S7, "goalRight", loadTextures, loadTextures, [1.0, 1.0, 1.0], scene);
@@ -214,11 +217,11 @@ function loadGameImposters(scene) {
 function loadMaterial(object /*BABYLON mesh*/, textureid /*title of the texture*/, texture /*Boolean*/, hasAlpha /*Boolean*/, default_color /*Array*/, scene /*BABYLON scene*/) {
   let _material = new BABYLON.StandardMaterial("texture_" + textureid, scene);
   if(texture && loadTextures) {
-    _material.diffuseTexture = new BABYLON.Texture("img/textures/texture_" + textureid + ".png", scene);
+    _material.diffuseTexture = new BABYLON.Texture("assets/textures/texture_" + textureid + ".png", scene);
     if(hasAlpha) {
     	_material.diffuseTexture.hasAlpha = true;
-    	_material.opacityTexture = new BABYLON.Texture("img/textures/texture_" + textureid + ".png", scene);
-    	// _material.bumpTexture = new BABYLON.Texture("img/textures/texture_" + textureid + ".png", scene);
+    	_material.opacityTexture = new BABYLON.Texture("assets/textures/texture_" + textureid + ".png", scene);
+    	// _material.bumpTexture = new BABYLON.Texture("assets/textures/texture_" + textureid + ".png", scene);
     	_material.ambientColor = new BABYLON.Color3(default_color[0], default_color[1], default_color[2]);
       _material.backFaceCulling = false;
     }else {
