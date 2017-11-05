@@ -1,0 +1,15 @@
+babylonJS
+by David Catuhe and David Rousset
+Link: https://www.babylonjs.com/
+Date Accessed: 10/21/2017
+
+Cannon.js
+by Stefan Hedman
+Link: http://www.cannonjs.org/
+Date Accessed: 10/22/2017
+
+documentation.js
+by Tom MacWright and many others
+Link: http://documentation.js.org/
+Date Accessed: 11/4/2017
+
