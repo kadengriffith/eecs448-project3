@@ -64,3 +64,10 @@ List of features and descriptions of exstimated complexity and time required to 
 	AI, or their friends, in real time. Online sessions will be created that allow
 	users to play against their friends. Time needed to research, design, and
 	implement this feature is about 10 days.
+
+12. Improve AI
+
+	Make the AI more sophisticated. Instead of simply following and returning the puck, 
+	AI will predict the puck's location and aim for the goal as much as possible.
+	Multiple difficulties will be created to determine how aggressive AI behaves.
+	Time needed to complete this feature is about 3 days.
