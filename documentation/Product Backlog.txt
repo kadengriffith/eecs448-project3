@@ -1,0 +1,66 @@
+List of features and descriptions of exstimated complexity and time required to complete:
+
+1. 3D air hockey table in browser
+
+	babylonJS used to create 3D renders of puck and air hockey strikers. The estimated
+	time required to complete this task is about 1 day.
+
+2. Implement physics engine
+
+	Implementing the physics engine allows for the 3D renders to interact with each other.
+	strikers will be table to move around play area, collide with walls and hit the puck.
+	Time required to complete this task is about 1 day.
+
+3. Create simple AI
+
+	Creating the AI gives the player something to play against, essentially making
+	the project a real game. AI simply follows the puck's location and hits it towards
+	the player when it can. Estimated time to complete this feature is about 3 hours.
+
+4. Track player input
+
+	Read input from the keyboard, move the player's striker accordingly. Time needed
+	to complete this task is about 2 hours.
+
+5. Create start menu and pause menu
+
+	Start menu that welcomes user, displays the leaderboard, and controls the start
+	of each game, with team selection. Pause menu is displayed when game is paused,
+	shows controls, allows player to exit game. Time needed to complete this portion
+	is only about 3 hours.
+
+6. Implement HUD
+
+	The Heads Up Display (HUD) displays information during the actual game. This
+	information includes the remaining time and current score. Time needed to complete
+	this is about 2 hours.
+
+7. Add textures to each surface
+
+	These textures give each rendered object their color. This transforms the game from
+	simple gray squares and disks to a virtual air hockey. Time required to add textures
+	for each shape is about 3 days.
+
+8. Construct MySQL database
+
+	This database keeps track of how many wins each color has. This information is
+	displayed to the user at the start menu. Time needed to complete this feature is
+	about 1 day.
+
+9. Include end game screen
+
+	Simple screen displayed when the game timer has expired. Tells the user if they
+	have won or lost. Time needed to add this is only about 1 hour.
+
+10. Implement sound
+
+	To truly emulate the air hockey experience, the iconic sounds should be added.
+	Puck sounds will be played whenever the puck enters a goal, or hits a wall or 
+	striker. Time needed to complete this feature is about 4 days.
+
+11. Implement multiplayer
+
+	As a finishing touch, the player will have the option to either play against the
+	AI, or their friends, in real time. Online sessions will be created that allow
+	users to play against their friends. Time needed to research, design, and
+	implement this feature is about 10 days.
