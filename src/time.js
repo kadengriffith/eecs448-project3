@@ -34,7 +34,7 @@ function startSeconds() {
     	      }).done(function(data){
               console.log(data);
             });
-            document.getElementById("WINORLOSE").innerHTML += 'Your score has been added to the ' + _color.toLowerCase() + ' team "Team."<br><br>';
+            document.getElementById("WINORLOSE").innerHTML += 'Your score has been added to the ' + _color.toLowerCase() + ' team<br><br>';
           }else {
             document.getElementById("WINORLOSE").innerHTML += "You Lose!"
           }

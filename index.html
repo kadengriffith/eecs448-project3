@@ -216,7 +216,7 @@
   // ADD NEW SCREEN VIEWS HERE
   function game_view() {
     if(document.getElementById('team_select').value === "null") {
-      alert('Please choose a team "Team" to start a game.');
+      alert('Please choose a team to start a game.');
       home_view();
     }else {
       document.getElementsByClassName('view_screen')[0].style.display = 'none';
@@ -291,9 +291,9 @@
       </div>
       <!-- This is the landing page LEFT -->
       <div style="float:left;width:69%;display:inline-block;text-align:center;margin-top:10%;"">
-        <h2 class="view_screen_title"><br>Select a team "Team" you <br> think you can puck with...<br><br></h2><br>
+        <h2 class="view_screen_title"><br>Select a team you <br> think you can puck with...<br><br></h2><br>
         <select id="team_select" style="height:25px;width:189px;margin-top:1%;">
-          <option value="null"><pre>Please select a team "Team"</pre></option>
+          <option value="null"><pre>Please select a team</pre></option>
           <option value="RED">RED TEAM</option>
           <option value="BLUE">BLUE TEAM</option>
           <option value="YELLOW">YELLOW TEAM</option>
