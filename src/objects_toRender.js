@@ -42,6 +42,12 @@
   let score_red = 0;
 //
 // Used in scene creation
+
+/**
+ * Gives each shape and surface is appropriate size, color, position. Controls lighting and camera placement.
+ * @param {scene} scene scene object containing all gameplay elements
+ */
+
 function loadGameObjects(scene) {
   let puck_skin = "puck"; // Now we can dynamically load textures to fit themes
   // This creates a light, aiming 0,1,0 - to the sky
@@ -196,6 +202,12 @@ function loadGameObjects(scene) {
   scene.activeCamera = Camera2;
 }
 // Used in scene creation
+
+/**
+ * Creates hitboxes for each object and wall, enables use of physics engine. Gives puck and players their physical properties
+ * @param {scene} scene scene object containing all gameplay elements
+ */
+
 function loadGameImposters(scene) {
   // Imposters for Babylon/Cannon's calculations
   Ground.physicsImpostor = new BABYLON.PhysicsImpostor(Ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: ground_restitution }, scene);
@@ -214,6 +226,18 @@ function loadGameImposters(scene) {
   Puck.physicsImpostor = new BABYLON.PhysicsImpostor(Puck, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: puck_mass, friction: puck_friction, restitution: puck_restitution }, scene);
 }
 // Used in scene creation
+
+/**
+ * Pulls texture from server, or from parameters, and applies it to specified object
+ * @param {mesh} object object to be textured
+ * @param {string} textureid name of texture
+ * @param {boolean} texture true if texture exists, false if not
+ * @param {boolean} hasAlpha true if texture is at all transparent, false if not
+ * @param {array} default_color array representing default color info in rgb format
+ * @param {scene} scene scene object containing all gameplay elements
+ *
+ */
+
 function loadMaterial(object /*BABYLON mesh*/, textureid /*title of the texture*/, texture /*Boolean*/, hasAlpha /*Boolean*/, default_color /*Array*/, scene /*BABYLON scene*/) {
   let _material = new BABYLON.StandardMaterial("texture_" + textureid, scene);
   if(texture && loadTextures) {

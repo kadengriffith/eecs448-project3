@@ -24,6 +24,10 @@ window.onload = function() {
   console.log('LOADED RESOURCE: colorPick.js -- Working as usual...');
 };
 
+/**
+ * Reads color information from sliders in the DOM, setting player's color to any rgb possibility (feature still in development)
+ */
+
 function update() {
   value_red = document.getElementsByClassName('RED')[0].value;
   value_green = document.getElementsByClassName('GREEN')[0].value;

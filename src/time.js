@@ -4,6 +4,11 @@
 let game_seconds = 0;
 let seconds = 0;
 let paused = true;
+
+/**
+ * Initializes timer and controls remaining time during game. Calls proper functions once time has run out
+ */
+
 function startSeconds() {
   seconds = 0;
   setInterval(function(){
@@ -29,7 +34,7 @@ function startSeconds() {
     	      }).done(function(data){
               console.log(data);
             });
-            document.getElementById("WINORLOSE").innerHTML += 'Your score has been added to the ' + _color.toLowerCase() + ' team "Team."<br><br>';
+            document.getElementById("WINORLOSE").innerHTML += 'Your score has been added to the ' + _color.toLowerCase() + ' team<br><br>';
           }else {
             document.getElementById("WINORLOSE").innerHTML += "You Lose!"
           }
@@ -48,7 +53,11 @@ function startSeconds() {
     game_seconds++;
   }, 1000 /* One Second */);
 }
-// Used for displaying score to HUD
+
+/**
+ * Displays player score and ai score to HUD during game
+ */
+
 function getScore() {
   document.getElementsByClassName("score")[0].innerHTML = score_red;
   document.getElementsByClassName("score")[1].innerHTML = score_ai;
