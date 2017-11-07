@@ -6,7 +6,7 @@
 	}
 	$color = $_POST['color'];
 	$query = "UPDATE Leaderboard SET wins = wins + 1 WHERE color = '" . $color . "'";
-	echo "SERVER SAYS: Score added successfully :)";
+	echo "SERVER SAYS: Score added successfully";
 	$leaderboard->query($query);
 	$leaderboard->close();
 ?>

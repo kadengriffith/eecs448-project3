@@ -22,9 +22,9 @@
   let puck_diameter = 3.2;
   let puck_yoff = puck_height / 2;
   let puck_polygons = 50;
-  let puck_mass = 3.22;
+  let puck_mass = 4.22;
   let puck_friction = 0;
-  let puck_restitution = 1;
+  let puck_restitution = 0.9;
   // Ground
   let ground_length = 80;
   let ground_restitution = 0;
@@ -32,7 +32,7 @@
   // Walls
   let playarea_height = 25;
   let playarea_yoff = -0.5;
-  let playarea_restitution = 0.7;
+  let playarea_restitution = 1;
   let playarea_localOpacity = 1.0;
   // Goal
   let goal_height = 0.16; // ~Half puck_height
@@ -73,7 +73,7 @@ function loadGameObjects(scene) {
   Puck = BABYLON.Mesh.CreateCylinder("puck", puck_height, puck_diameter, puck_diameter, puck_polygons, 1, scene);
   Puck.position = new BABYLON.Vector3(0, puck_yoff + 10, 0);
   // Set the puck material
-  loadMaterial(Puck, puck_skin, loadTextures, false, [0.5, 1.0, 0.5], scene);
+  loadMaterial(Puck, puck_skin, loadTextures, false, [1.0, 1.0, 1.0], scene);
   // This creates the controlled object
   Player1 = BABYLON.Mesh.CreateCylinder("player1", player_height, player_diameter, player_diameter, player_polygons, 1, scene);
   Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
@@ -88,7 +88,7 @@ function loadGameObjects(scene) {
   // Appears as RIGHT bounded box
   S1 = BABYLON.MeshBuilder.CreatePlane("side1", playarea_height, scene);
   S1.scaling = new BABYLON.Vector3(ground_length, playarea_height, 1);
-  S1.rotation.y = Math.PI / 2;
+  S1.rotation.y = (-Math.PI / 2);
   S1.position.x = (-ground_length / 3);
   S1.position.y = playarea_yoff + (playarea_height / 2);
   // Use showPlayArea to view the boundaries
