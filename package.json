@@ -1,0 +1,27 @@
+{
+  "name": "eecs448-project3",
+  "version": "1.0.0",
+  "description": "live demo: https://kadengriffith.me/eecs448-project3/index.html # ...this is helpful when we're working with graphics, and a badass game when we aren't",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadengriffith/eecs448-project3.git"
+  },
+  "author": "Team Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadengriffith/eecs448-project3/issues"
+  },
+  "homepage": "https://github.com/kadengriffith/eecs448-project3#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
