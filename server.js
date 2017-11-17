@@ -16,13 +16,13 @@ var io = socket(server);
 io.on('connection', function(socket){
   console.log("made socket connection: " + socket.id);
 
-  // When this user emits, client side: socket.emit('otherevent',some data);
-  socket.on('othermouse', function(data) {
+  // When this user emits, client side: socket.emit('puckmove',some data);
+  socket.on('puckmove', function(data) {
     // Data comes in as whatever was sent, including objects
-    console.log("Received: 'othermouse' " + data.x + " " + data.y);
+    console.log("Received: 'puckmove' " + data.x + " " + data.y);
 
     // Send it to all of the clients
-    socket.broadcast.emit('othermouse', data);
+    socket.broadcast.emit('puckmove', data);
   });
 
   socket.on('disconnect', function() {

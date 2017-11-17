@@ -6,10 +6,6 @@
 //  G A M E   S T A R T
 //########################
 // INITIAL SETTINGS
-var socket = io.connect();
-socket.on('connect', function() {
-  console.log("Connected main.js");
-});
 let showPlayArea = false;
 let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window
@@ -24,6 +20,18 @@ document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
 let game = document.getElementById('view_GAME');
 let engine = new BABYLON.Engine(game, true);
 // @END CONTEXT & ENGINE
+
+//SOCKET.IO
+var socket = io.connect();
+socket.on('connect', function() {
+  console.log("Connected main.js");
+});
+// // Puck location
+// var puckLocation = function(xval, yval, zval) {
+//   console.log("puck: " + xval + " " + yval + " " + zval);
+// };
+
+
 // SCENE INSTANTIATION
 
 /**
@@ -201,6 +209,19 @@ engine.runRenderLoop(function () {
   }
   // Display to the screen ~60fps
   scene.render();
+  // Monitor puck and players
+  var xPuck = Puck.position.x;
+  var yPuck = Puck.position.y;
+  var zPuck = Puck.position.z;
+  var xPlayer1 = Player1.position.x;
+  var yPlayer1 = Player1.position.y;
+  var zPlayer1 = Player1.position.z;
+  var xAI = AI.position.x;
+  var yAI = AI.position.y;
+  var zAI = AI.position.z;
+  sendPuck(xPuck,yPuck,zPuck);
+  sendPlayer1(xPlayer1,yPlayer1,zPlayer1);
+  sendAI(xAI,xAI,zAI);
 });
 // @END UPDATE LOOP
 //########################
@@ -238,4 +259,18 @@ function dropPlayer(str, loc) {
     }
   }
   return;
+}
+// Monitor AI
+function sendAI(x,y,z) {
+  console.log("AI x:" + x + " y:" + y + " z:" + z);
+}
+
+// Monitor puck
+function sendPuck(x,y,z) {
+  console.log("Puck x:" + x + " y:" + y + " z:" + z);
+}
+
+// Monitor player 1
+function sendPlayer1(x,y,z) {
+  console.log("Player1 x:" + x + " y:" + y + " z:" + z);
 }
