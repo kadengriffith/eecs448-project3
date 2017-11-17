@@ -1,4 +1,7 @@
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect();
+socket.on('connect', function() {
+  console.log("Connected babylon.custom.js");
+});
 var __decorate = this && this.__decorate || function(e, t, i, r) {
         var n,
             o = arguments.length,

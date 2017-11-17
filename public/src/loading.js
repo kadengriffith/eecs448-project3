@@ -1,7 +1,10 @@
 // author      : Kaden Griffith
 // filename    : loading.js
 // description : a simple DOM image preloader
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect();
+socket.on('connect', function() {
+  console.log("Connected loading.js");
+});
 let total_number_of_images = 26; // This is a manual setting please verify
 let image_count_verification = 0;
 let loaded = false;

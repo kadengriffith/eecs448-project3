@@ -6,7 +6,10 @@
 //  G A M E   S T A R T
 //########################
 // INITIAL SETTINGS
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect();
+socket.on('connect', function() {
+  console.log("Connected main.js");
+});
 let showPlayArea = false;
 let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window

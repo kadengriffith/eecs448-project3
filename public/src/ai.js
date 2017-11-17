@@ -5,7 +5,10 @@
 /**
  * Moves ai towards its starting position
  */
-var socket = io.connect('http://localhost:3000');
+ var socket = io.connect();
+ socket.on('connect', function() {
+   console.log("Connected ai.js");
+ });
 function AIReturn() { //sends ai back to starting position
   if(AI.position.x > 0) {
     AI.position.x -= ai_speed;
