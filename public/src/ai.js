@@ -1,14 +1,14 @@
 // filename    : ai.js
 // description : Artificial Intelligence helper functions
 // last update : 10 25 2017
+var socket = io.connect();
+socket.on('connect', function() {
+  console.log("Connected ai.js");
+});
 
 /**
  * Moves ai towards its starting position
  */
- var socket = io.connect();
- socket.on('connect', function() {
-   console.log("Connected ai.js");
- });
 function AIReturn() { //sends ai back to starting position
   if(AI.position.x > 0) {
     AI.position.x -= ai_speed;
