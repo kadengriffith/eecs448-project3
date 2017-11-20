@@ -1,7 +1,7 @@
 // filename    : main.js
 // description : Main game loop
 // last update : 10 25 2017// HTTP Portion
-//////////////////////////////////////////
+/////////////////////////////////////////
 //########################
 //  G A M E   S T A R T
 //########################
@@ -26,6 +26,17 @@ var socket = io.connect();
 socket.on('connect', function() {
   console.log("Connected main.js");
 });
+
+socket.on('puckmove', function(data) {
+  console.log("Puck Move x: " + data.x + " y: " + data.y + " z: " + data.z);
+});
+
+socket.on('playermove', function(data) {
+  console.log("Player Move x: " + data.x + " y: " + data.y + " z: " + data.z);
+  //copy and paste these functions somewhere else where they can be used to draw shapes in the
+  //locations represented by the data
+});
+
 // // Puck location
 // var puckLocation = function(xval, yval, zval) {
 //   console.log("puck: " + xval + " " + yval + " " + zval);
@@ -221,7 +232,6 @@ engine.runRenderLoop(function () {
   var zAI = AI.position.z;
   sendPuck(xPuck,yPuck,zPuck);
   sendPlayer1(xPlayer1,yPlayer1,zPlayer1);
-  sendAI(xAI,xAI,zAI);
 });
 // @END UPDATE LOOP
 //########################
@@ -260,17 +270,13 @@ function dropPlayer(str, loc) {
   }
   return;
 }
-// Monitor AI
-function sendAI(x,y,z) {
-  console.log("AI x:" + x + " y:" + y + " z:" + z);
-}
 
 // Monitor puck
-function sendPuck(x,y,z) {
-  console.log("Puck x:" + x + " y:" + y + " z:" + z);
+function sendPuck(px, py, pz) {
+  socket.emit('puckmove', {x: px, y: py, z: pz});
 }
 
 // Monitor player 1
-function sendPlayer1(x,y,z) {
-  console.log("Player1 x:" + x + " y:" + y + " z:" + z);
+function sendPlayer1(px, py, pz) {
+  socket.emit('playermove', {x: px, y: py, z: pz});
 }
