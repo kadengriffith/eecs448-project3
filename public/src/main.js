@@ -28,11 +28,11 @@ socket.on('connect', function() {
 });
 
 socket.on('puckmove', function(data) {
-  console.log("Puck Move x: " + data.x + " y: " + data.y + " z: " + data.z);
+  console.log("Puck location received from server, x: " + data.x + " y: " + data.y + " z: " + data.z);
 });
 
 socket.on('playermove', function(data) {
-  console.log("Player Move x: " + data.x + " y: " + data.y + " z: " + data.z);
+  console.log("Player location received from server, x: " + data.x + " y: " + data.y + " z: " + data.z);
   //copy and paste these functions somewhere else where they can be used to draw shapes in the
   //locations represented by the data
 });

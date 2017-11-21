@@ -19,14 +19,14 @@ io.on('connection', function(socket){
   // When this user emits, client side: socket.emit('puckmove',some data);
   socket.on('puckmove', function(data) {
     // Data comes in as whatever was sent, including objects
-    console.log("Puck Move id: " + socket.id + " x: " + data.x + " y: " + data.y + " z: " + data.z);
+    console.log("Puck location received from client id: " + socket.id + " x: " + data.x + " y: " + data.y + " z: " + data.z);
 
     // Send it to all of the clients
     socket.broadcast.emit('puckmove', data);
   });
 
   socket.on('playermove', function(data) {
-    console.log("Player Move id: " + socket.id + " x: " + data.x + " y: " + data.y + " z: " + data.z);
+    console.log("Player position received from client id: " + socket.id + " x: " + data.x + " y: " + data.y + " z: " + data.z);
     socket.broadcast.emit('playermove', data);
   });
 
