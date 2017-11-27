@@ -8,7 +8,7 @@
 let showPlayArea = false;
 let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window
-let loadTextures = true; // Only true when server-side
+let loadTextures = false; // Only true when server-side
 let loadSounds = false; // Only true when server-side
 let gravityConst = -9.81; /* -9.81 */
 // Time - Match length >= 1
@@ -59,7 +59,7 @@ if(enableTime && game_seconds === 0) { startSeconds(); } // See time.js
 
 engine.runRenderLoop(function () {
   getTeam();
-  if(!paused) { // Else -> present pause menu
+  if(!paused && loaded) { // Else -> present pause menu
     game_view();
     scene.activeCamera = Camera1;
     getScore(); // See time.js
@@ -70,21 +70,29 @@ engine.runRenderLoop(function () {
       dropPlayer("ai", "POSITION_INIT");
     }
     // Reset the puck if goal
-    if(Puck.position.z > ground_length / 2 + puck_diameter) {
-      // Blue
+    if(Puck.position.z > ground_length / 2 + puck_diameter && (Puck.position.x < goal_width / 2 || Puck.position.x > (-goal_width / 2 ))) {
+      // AI
       Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
+      Puck.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
   	  dropPuck("CENTER");
       AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
       Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
       setTimeout(score_ai++, 2000);
     }
-    if(Puck.position.z < -(ground_length / 2) - puck_diameter) {
+    if(Puck.position.z < -(ground_length / 2) - puck_diameter && (Puck.position.x < goal_width / 2 || Puck.position.x > (-goal_width / 2 ))) {
       // Red
       Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
+      Puck.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
       dropPuck("CENTER");
       AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
       Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
       setTimeout(score_red++, 2000);
+    }
+    // Catch if bug occurs
+    if(Puck.position.y < -20) {
+      Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
+      Puck.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
+  	  dropPuck("CENTER");
     }
     // Check keys
     if (key_D) {
@@ -113,9 +121,9 @@ engine.runRenderLoop(function () {
       player_speed = 0.33;
     }
     //prevent player1 from going to places that cause problems
-    if(PlayerOnBlueSide()) {
-      Player1.position.z += player_speed;
-    }
+    //if(PlayerOnBlueSide()) {
+    //  Player1.position.z += player_speed;
+    //}
     if(PlayerHittingBack()) {
       Player1.position.z -= player_speed;
     }
@@ -125,6 +133,10 @@ engine.runRenderLoop(function () {
     if(PlayerHittingRight()) {
       Player1.position.x += player_speed;
     }
+
+
+    console.log("x: " + Player1.position.x + " z: " + Player1.position.z);
+
     //control ai
     if(Puck.position.y > 1 && Puck.position.y < 3) {
       AIReturn();
@@ -184,9 +196,6 @@ engine.runRenderLoop(function () {
       Camera5.alpha = Math.PI / 3;
       Camera5.beta = Math.PI / 3;
       Camera5.radius = 80;
-    }
-    if (key_ESC == true) {
-      menu_view(); // Resume the game
     }
   }
   // Display to the screen ~60fps
