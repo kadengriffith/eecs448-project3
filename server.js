@@ -39,9 +39,7 @@ io.on('connection', function(socket){
   
   socket.on('waiting', function(data) {
     if(waitingCount == 0) {
-      console.log(waitingCount);
       waitingCount++;
-      console.log(waitingCount);
     } else if(waitingCount == 1) {
       socket.broadcast.emit('start', data);
     }
