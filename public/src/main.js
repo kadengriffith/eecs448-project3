@@ -347,31 +347,5 @@ socket.on('score', function(data) {
   // Delay function fixes unwanted goal increment white rendering fast
   setTimeout(function() {
       canScore = true;
-  }, 2000);
+  }, 500); // for half second cannot score
 });
-
-// // Add a point to player
-// function scoreRed() {
-//   if (canScore == true) {
-//   // score_red++;
-//   // socket.emit('score', {score_red});
-//   canScore = false;
-//   }
-//   // Delay function fixes unwanted goal increment on non-host machine white rendering too fast
-//   setTimeout(function() {
-//       canScore = true;
-//   }, 2000);
-// }
-
-// // Add a point to AI
-// function scoreAI() {
-//   if (canScore == true) {
-//   // score_ai++;
-//   // socket.emit('score', {score_ai});
-//   canScore = false;
-//   }
-  // Delay function fixes unwanted goal increment on non-host machine white rendering too fast
-//   setTimeout(function() {
-//       canScore = true;
-//   }, 2000);
-// }

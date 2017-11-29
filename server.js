@@ -54,6 +54,7 @@ io.on('connection', function(socket){
     waitingCount = 0;
   });
 
+  // Score incrementing
   socket.on('score', function(data) {
     socket.broadcast.emit('score', data);
   });
