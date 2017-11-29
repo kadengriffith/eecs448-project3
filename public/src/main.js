@@ -39,6 +39,8 @@ var puckAVZ = 0;
 
 var host = true;
 
+var canScore = true; // to deal with unwanted score incrementing while randering too fast
+
 socket.on('host', function(data) {
   host = data;
 });
@@ -80,7 +82,6 @@ socket.on('playermove', function(data) {
 // var puckLocation = function(xval, yval, zval) {
 //   console.log("puck: " + xval + " " + yval + " " + zval);
 // };
-
 
 // SCENE INSTANTIATION
 
@@ -136,11 +137,11 @@ engine.runRenderLoop(function () {
 		Puck.position.x = puckX;
 		Puck.position.y = puckY;
 		Puck.position.z = puckZ;
-	
+
 		Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(puckLVX, puckLVY, puckLVZ));
 		Puck.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(puckAVX, puckAVY, puckAVZ));
 	}
-	
+
     // Reset the puck if goal
     if(Puck.position.z > ground_length / 2 + puck_diameter && (Puck.position.x < goal_width / 2 || Puck.position.x > (-goal_width / 2 ))) {
       // AI
@@ -149,7 +150,10 @@ engine.runRenderLoop(function () {
   	  dropPuck("CENTER");
       AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
       Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
-      setTimeout(score_ai++, 2000);
+      // setTimeout(score_ai++, 2000);
+      // scoreAI();
+      socket.emit('score', {addTo:"Player1"});
+      getScore();
     }
     if(Puck.position.z < -(ground_length / 2) - puck_diameter && (Puck.position.x < goal_width / 2 || Puck.position.x > (-goal_width / 2 ))) {
       // Red
@@ -158,7 +162,10 @@ engine.runRenderLoop(function () {
       dropPuck("CENTER");
       AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
       Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
-      setTimeout(score_red++, 2000);
+      // setTimeout(score_red++, 2000);
+      // scoreRed();
+      socket.emit('score', {addTo:"AI"});
+      getScore();
     }
     // Catch if bug occurs
     if(Puck.position.y < -20) {
@@ -274,7 +281,7 @@ engine.runRenderLoop(function () {
   // Display to the screen ~60fps
   scene.render();
   // Monitor puck and players
-  sendPuck(Puck.position.x, Puck.position.y, Puck.position.z, 
+  sendPuck(Puck.position.x, Puck.position.y, Puck.position.z,
            Puck.physicsImpostor.getLinearVelocity().x, Puck.physicsImpostor.getLinearVelocity().y, Puck.physicsImpostor.getLinearVelocity().z,
 		   Puck.physicsImpostor.getAngularVelocity().x, Puck.physicsImpostor.getAngularVelocity().y, Puck.physicsImpostor.getAngularVelocity().z);
   sendPlayer1(Player1.position.x, Player1.position.y, Player1.position.z);
@@ -326,3 +333,45 @@ function sendPuck(px, py, pz, vxl, vyl, vzl, vxa, vya, vza) {
 function sendPlayer1(px, py, pz) {
   socket.emit('playermove', {x: px, y: py, z: pz});
 }
+
+// Update score after add goal recieved from server
+socket.on('score', function(data) {
+  if (canScore == true) {
+    if (data.addTo == "Player1") {score_red++;}
+    if (data.addTo == "AI") {score_ai++;}
+    console.log("Added score to " + data.addTo);
+    console.log("score_red: " + score_red);
+    console.log("score_ai: " + score_ai);
+  }
+  canScore  = false;
+  // Delay function fixes unwanted goal increment white rendering fast
+  setTimeout(function() {
+      canScore = true;
+  }, 2000);
+});
+
+// // Add a point to player
+// function scoreRed() {
+//   if (canScore == true) {
+//   // score_red++;
+//   // socket.emit('score', {score_red});
+//   canScore = false;
+//   }
+//   // Delay function fixes unwanted goal increment on non-host machine white rendering too fast
+//   setTimeout(function() {
+//       canScore = true;
+//   }, 2000);
+// }
+
+// // Add a point to AI
+// function scoreAI() {
+//   if (canScore == true) {
+//   // score_ai++;
+//   // socket.emit('score', {score_ai});
+//   canScore = false;
+//   }
+  // Delay function fixes unwanted goal increment on non-host machine white rendering too fast
+//   setTimeout(function() {
+//       canScore = true;
+//   }, 2000);
+// }

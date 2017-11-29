@@ -30,14 +30,14 @@ function startSeconds() {
           if(score_red > score_ai) {
             document.getElementById("WINORLOSE").innerHTML += "You Won!<br><br>";
             // This is where we access the server and add the score
-	          $.ajax({
-              url: 'src/incrementWins.php',
-              type: 'POST',
-              dataType: 'json',
-              data: { color:_color.toLowerCase() },
-    	      }).done(function(data){
-              console.log(data);
-            });
+	          // $.ajax({
+            //   url: 'src/incrementWins.php',
+            //   type: 'POST',
+            //   dataType: 'json',
+            //   data: { color:_color.toLowerCase() },
+    	      // }).done(function(data){
+            //   console.log(data);
+            // });
             document.getElementById("WINORLOSE").innerHTML += 'Your score has been added to the ' + _color.toLowerCase() + ' team<br><br>';
           }else {
             document.getElementById("WINORLOSE").innerHTML += "You Lose!"
@@ -61,7 +61,6 @@ function startSeconds() {
 /**
  * Displays player score and ai score to HUD during game
  */
-
 function getScore() {
   document.getElementsByClassName("score")[0].innerHTML = score_red;
   document.getElementsByClassName("score")[1].innerHTML = score_ai;

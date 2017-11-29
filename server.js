@@ -14,11 +14,11 @@ var io = socket(server);
 
 io.on('connection', function(socket){
   //console.log("made socket connection: " + socket.id);
-  
+
   if(Object.keys(io.clients().sockets).length > 7) {
     socket.broadcast.emit('host', false);
   }
-  
+
   // When this user emits, client side: socket.emit('puckmove',some data);
   socket.on('puckmove', function(data) {
     // Data comes in as whatever was sent, including objects
@@ -32,11 +32,11 @@ io.on('connection', function(socket){
     //console.log("Player location received from client id: " + socket.id + " x: " + data.x + " y: " + data.y + " z: " + data.z);
     socket.broadcast.emit('playermove', data);
   });
-  
+
   socket.on('start', function(data) {
     socket.broadcast.emit('start', data);
   });
-  
+
   socket.on('waiting', function(data) {
     if(waitingCount == 0) {
       waitingCount++;
@@ -44,7 +44,7 @@ io.on('connection', function(socket){
       socket.broadcast.emit('start', data);
     }
   });
-  
+
   socket.on('start2', function(data) {
     socket.broadcast.emit('start2', data);
   });
@@ -53,5 +53,10 @@ io.on('connection', function(socket){
     //console.log("Client has disconnected " + socket.id);
     waitingCount = 0;
   });
+
+  socket.on('score', function(data) {
+    socket.broadcast.emit('score', data);
+  });
+
 }
 );
