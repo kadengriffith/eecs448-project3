@@ -56,7 +56,7 @@ io.on('connection', function(socket){
 
   // Score incrementing
   socket.on('score', function(data) {
-    socket.broadcast.emit('score', data);
+    io.of('/').emit('score', data);
   });
 
 }

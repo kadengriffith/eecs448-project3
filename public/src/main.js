@@ -12,6 +12,8 @@ let reloadOnTimeEnd = false; // After time length reload the window
 let gravityConst = -9.81; /* -9.81 */
 let selfDestruct = false;
 let stamina = 100;
+let scene;
+let loaded = true;
 // Time - Match length >= 1
 let minutes = 5; // See time.js
 document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
@@ -20,8 +22,7 @@ document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
 let game = document.getElementById('view_GAME');
 let engine = new BABYLON.Engine(game, true);
 // @END CONTEXT & ENGINE
-runGame();
-function runGame() {
+
   //SOCKET.IO
   if(!enableAi) {
     var socket = io.connect();
@@ -114,7 +115,7 @@ function runGame() {
     // End of createScene function
     return scene;
   };
-  let scene = createScene();
+  scene = createScene();
   // @END SCENE INSTANTIATION
   if(enableTime && game_seconds === 0) { startSeconds(); } // See time.js
   // UPDATE LOOP
@@ -155,11 +156,11 @@ function runGame() {
     	  dropPuck("CENTER");
         AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
         Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
-        if(enableAi) {
+        //if(enableAi) {
           setTimeout(score_ai++, 2000);
-        }else {
-          socket.emit('score', {addTo:"Player1"});
-        }
+        //}else {
+        //  socket.emit('score', {addTo:"Player1"});
+        //}
         getScore();
       }
       if(Puck.position.z < -(ground_length / 2) - puck_diameter && (Puck.position.x < goal_width / 2 || Puck.position.x > (-goal_width / 2 ))) {
@@ -169,11 +170,11 @@ function runGame() {
         dropPuck("CENTER");
         AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
         Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
-        if(enableAi) {
+        //if(enableAi) {
           setTimeout(score_red++, 2000);
-        }else {
-          socket.emit('score', {addTo:"AI"});
-        }
+        //}else {
+        //  socket.emit('score', {addTo:"AI"});
+        //}
         getScore();
       }
       // Catch if bug occurs
@@ -311,7 +312,7 @@ function runGame() {
     // Display to the screen ~60fps
     scene.render();
   });
-}
+
 // @END UPDATE LOOP
 //########################
 //  G A M E   E N D  :(
