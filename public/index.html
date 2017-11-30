@@ -193,7 +193,7 @@
       z-index:10;
     }
     .view_screen_title {
-      margin-top:13%;
+      margin-top:4%;
       color:#f4f4f4;
       background-color:#ccc;
       text-shadow:0px 0px 6px rgba(0,0,0,0.2);
@@ -239,11 +239,6 @@
     document.getElementsByClassName('view_screen')[4].style.display = 'none';
   }
   function menu_view() {
-    //paused = true;
-    Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
-    Puck.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
-    Player1.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop player
-    AI.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop ai
     document.getElementsByClassName('view_screen')[0].style.display = 'none';
     document.getElementsByClassName('view_screen')[1].style.display = 'none';
     document.getElementsByClassName('view_screen')[2].style.display = 'block';
@@ -270,17 +265,17 @@
     document.getElementsByClassName('view_screen')[4].style.display = 'block';
   }
   function waiting_view() {
-  if(document.getElementById('team_select').value === "null") {
+    if(document.getElementById('team_select').value === "null") {
       alert('Please choose a team to start a game.');
       home_view();
     }else {
-    socket.emit('waiting', {});
-    document.getElementsByClassName('view_screen')[0].style.display = 'none';
-    document.getElementsByClassName('view_screen')[1].style.display = 'none';
-    document.getElementsByClassName('view_screen')[2].style.display = 'none';
-    document.getElementsByClassName('view_screen')[3].style.display = 'none';
-    document.getElementsByClassName('view_screen')[4].style.display = 'none';
-    document.getElementsByClassName('view_screen')[5].style.display = 'block';
+      socket.emit('waiting', {});
+      document.getElementsByClassName('view_screen')[0].style.display = 'none';
+      document.getElementsByClassName('view_screen')[1].style.display = 'none';
+      document.getElementsByClassName('view_screen')[2].style.display = 'none';
+      document.getElementsByClassName('view_screen')[3].style.display = 'none';
+      document.getElementsByClassName('view_screen')[4].style.display = 'none';
+      document.getElementsByClassName('view_screen')[5].style.display = 'block';
     }
   }
   </script>
@@ -307,7 +302,7 @@
         <div class="gameTitle" style="text-shadow:0px 0px 20px #2980b9;">!</div>
       </div>
       <!-- This is the landing page LEFT -->
-      <div style="float:left;width:69%;display:inline-block;text-align:center;margin-top:10%;"">
+      <div style="float:left;width:69%;display:inline-block;text-align:center;margin-top:4%;"">
         <h2 class="view_screen_title"><br>Select a team you <br> think you can puck with...<br><br></h2><br>
         <select id="team_select" style="height:25px;width:189px;margin-top:1%;">
           <option value="null"><pre>Please select a team</pre></option>
@@ -316,7 +311,8 @@
           <option value="YELLOW">YELLOW TEAM</option>
           <option value="GREEN">GREEN TEAM</option>
         </select>
-        <a onclick="javascript:waiting_view();" class="textured_button"> PLAY </a><br>
+        <a onclick="javascript:waiting_view();" class="textured_button"> ONLINE PLAY </a><br>
+        <a onclick="javascript:setAi(True);runGame();game_view();" class="textured_button"> SOLO PLAY </a><br>
         <!-- a onclick="javaascript:menu_view()" class="textured_button"> SETTINGS </a -->
         <div class="footer">
           © team "Team" 2017
@@ -415,6 +411,7 @@
   <script src="src/objects_toRender.js" type="text/javascript"></script>
   <script src="src/time.js" type="text/javascript"></script>
   <script src="src/ai.js" type="text/javascript"></script>
+  <script src="src/air.js" type="text/javascript"></script>
   <script src="src/main.js" type="text/javascript"></script>
 </body>
 </html>
