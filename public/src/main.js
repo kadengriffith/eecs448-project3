@@ -25,7 +25,7 @@ let engine = new BABYLON.Engine(game, true);
 
   //SOCKET.IO
   if(!enableAi) {
-    var socket = io.connect();
+   var socket = io.connect();
     socket.on('connect', function() {
       console.log("Connected main.js");
     });
@@ -41,8 +41,6 @@ let engine = new BABYLON.Engine(game, true);
     var puckAVZ = 0;
 
     var host = true;
-
-    var canScore = true; // to deal with unwanted score incrementing while randering too fast
 
     socket.on('host', function(data) {
       host = data;
@@ -135,10 +133,7 @@ let engine = new BABYLON.Engine(game, true);
       }else if(AI.position.y < -20) {
         dropPlayer("ai", "POSITION_INIT");
       }
-      if(isNaN(Puck.position.y)) {
-        dropPuck("CENTER");
-      }
-      if(!enableAi){
+      if(!enableAi) {
         if(!host) {
       		Puck.position.x = puckX;
       		Puck.position.y = puckY;
@@ -153,15 +148,10 @@ let engine = new BABYLON.Engine(game, true);
         // AI
         Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
         Puck.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
-    	  dropPuck("CENTER");
+    	dropPuck("CENTER");
         AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
         Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
-        //if(enableAi) {
-          setTimeout(score_ai++, 2000);
-        //}else {
-        //  socket.emit('score', {addTo:"Player1"});
-        //}
-        getScore();
+	setTimeout(score_ai++, 2000);
       }
       if(Puck.position.z < -(ground_length / 2) - puck_diameter && (Puck.position.x < goal_width / 2 || Puck.position.x > (-goal_width / 2 ))) {
         // Red
@@ -170,19 +160,14 @@ let engine = new BABYLON.Engine(game, true);
         dropPuck("CENTER");
         AI.position = new BABYLON.Vector3(0, player_yoff, (-ground_length / 2) + player_diameter);
         Player1.position = new BABYLON.Vector3(0, player_yoff, (ground_length / 2) - player_diameter);
-        //if(enableAi) {
-          setTimeout(score_red++, 2000);
-        //}else {
-        //  socket.emit('score', {addTo:"AI"});
-        //}
-        getScore();
+	setTimeout(score_red++, 2000);
       }
       // Catch if bug occurs
       if(Puck.position.y < -20) {
         Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
         Puck.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
-    	  dropPuck("CENTER");
-      }
+        dropPuck("CENTER");
+       }
       // Check keys
       if (key_D) {
         Player1.position.x -= player_speed;
@@ -299,9 +284,11 @@ let engine = new BABYLON.Engine(game, true);
     if(selfDestruct) {
       selfDestruct = false;
       scene.dispose();
-      runGame();
+      //runGame();
       paused = false;
     }
+
+    scene.render();
     // Monitor puck and players
     if(!enableAi) {
       sendPuck(Puck.position.x, Puck.position.y, Puck.position.z,
@@ -310,7 +297,6 @@ let engine = new BABYLON.Engine(game, true);
       sendPlayer1(Player1.position.x, Player1.position.y, Player1.position.z);
     }
     // Display to the screen ~60fps
-    scene.render();
   });
 
 // @END UPDATE LOOP
@@ -367,24 +353,6 @@ function setAi(bool) {
     enableAi = bool;
     return;
   }
-}
-
-// Update score after add goal recieved from server
-if(!enableAi) {
-  socket.on('score', function(data) {
-    if (canScore == true) {
-      if (data.addTo == "Player1") {score_red++;}
-      if (data.addTo == "AI") {score_ai++;}
-      console.log("Added score to " + data.addTo);
-      console.log("score_red: " + score_red);
-      console.log("score_ai: " + score_ai);
-    }
-    canScore  = false;
-    // Delay function fixes unwanted goal increment white rendering fast
-    setTimeout(function() {
-        canScore = true;
-    }, 500); // for half second cannot score
-  });
 }
 
 function resetForSolo() {
