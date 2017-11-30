@@ -1,27 +1,6 @@
 // author      : Kaden Griffith
 // filename    : loading.js
 // description : a simple DOM image preloader
-/*
-for server: online(true);
-for offline mode: online(false);
-*/
-let loadTextures;
-let loadSounds;
-let enableAi;
-function online(bool) {
-  if(bool) {
-    loadTextures = true;
-    loadSounds = true;
-    enableAi = false;
-  }else {
-    loadTextures = false;
-    loadSounds = false;
-    enableAi = true;
-  }
-}
-
-online(true); // Adjust modes here
-
 if(loadTextures) {
   if(!enableAi) {
     var socket = io.connect();
@@ -75,7 +54,8 @@ if(loadTextures) {
         'assets/textures/texture_puck.png',
         'assets/textures/texture_sides.png'
   ]);
+}else {
+  console.log("offline play enabled");
+  loaded = true; // No Textures or Sound in offline
+  document.getElementById('loadingWrapper').style.display = 'none';
 }
-console.log("offline play enabled");
-loaded = true; // No Textures or Sound in offline
-document.getElementById('loadingWrapper').style.display = 'none';

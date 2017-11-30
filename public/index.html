@@ -9,7 +9,8 @@
   <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="/socket.io/socket.io.js"></script>
+  <script src="src/config.js" type="text/javascript"></script>
+  <script src="src/onlineBuffer.js" type="text/javascript"></script>
   <style>
   /*
   Color Palette:
@@ -66,7 +67,7 @@
     }
     .textured_button {
       display:block;
-      margin:0.5em;
+      margin-bottom:0.5em;
       margin-left:auto;
       margin-right:auto;
       height:44px;
@@ -228,6 +229,7 @@
       document.getElementsByClassName('view_screen')[3].style.display = 'none';
       document.getElementsByClassName('view_screen')[4].style.display = 'none';
       document.getElementsByClassName('view_screen')[5].style.display = 'none';
+      document.getElementsByClassName('view_screen')[6].style.display = 'none';
       paused = false;
     }
   }
@@ -237,6 +239,9 @@
     document.getElementsByClassName('view_screen')[2].style.display = 'none';
     document.getElementsByClassName('view_screen')[3].style.display = 'none';
     document.getElementsByClassName('view_screen')[4].style.display = 'none';
+    document.getElementsByClassName('view_screen')[5].style.display = 'none';
+    document.getElementsByClassName('view_screen')[6].style.display = 'none';
+
   }
   function menu_view() {
     document.getElementsByClassName('view_screen')[0].style.display = 'none';
@@ -244,6 +249,9 @@
     document.getElementsByClassName('view_screen')[2].style.display = 'block';
     document.getElementsByClassName('view_screen')[3].style.display = 'none';
     document.getElementsByClassName('view_screen')[4].style.display = 'none';
+    document.getElementsByClassName('view_screen')[5].style.display = 'none';
+    document.getElementsByClassName('view_screen')[6].style.display = 'none';
+
   }
   function instructions_view() {
     document.getElementsByClassName('view_screen')[0].style.display = 'none';
@@ -251,6 +259,17 @@
     document.getElementsByClassName('view_screen')[2].style.display = 'none';
     document.getElementsByClassName('view_screen')[3].style.display = 'block';
     document.getElementsByClassName('view_screen')[4].style.display = 'none';
+    document.getElementsByClassName('view_screen')[5].style.display = 'none';
+    document.getElementsByClassName('view_screen')[6].style.display = 'none';
+  }
+  function instructions_view_home() {
+    document.getElementsByClassName('view_screen')[0].style.display = 'none';
+    document.getElementsByClassName('view_screen')[1].style.display = 'none';
+    document.getElementsByClassName('view_screen')[2].style.display = 'none';
+    document.getElementsByClassName('view_screen')[3].style.display = 'none';
+    document.getElementsByClassName('view_screen')[4].style.display = 'none';
+    document.getElementsByClassName('view_screen')[5].style.display = 'none';
+    document.getElementsByClassName('view_screen')[6].style.display = 'block';
   }
   function winlose_view() {
     paused = true;
@@ -263,6 +282,8 @@
     document.getElementsByClassName('view_screen')[2].style.display = 'none';
     document.getElementsByClassName('view_screen')[3].style.display = 'none';
     document.getElementsByClassName('view_screen')[4].style.display = 'block';
+    document.getElementsByClassName('view_screen')[5].style.display = 'none';
+    document.getElementsByClassName('view_screen')[6].style.display = 'none';
   }
   function waiting_view() {
     if(document.getElementById('team_select').value === "null") {
@@ -279,6 +300,7 @@
       document.getElementsByClassName('view_screen')[3].style.display = 'none';
       document.getElementsByClassName('view_screen')[4].style.display = 'none';
       document.getElementsByClassName('view_screen')[5].style.display = 'block';
+      document.getElementsByClassName('view_screen')[6].style.display = 'none';
     }
   }
   </script>
@@ -305,9 +327,9 @@
         <div class="gameTitle" style="text-shadow:0px 0px 20px #2980b9;">!</div>
       </div>
       <!-- This is the landing page LEFT -->
-      <div style="float:left;width:69%;display:inline-block;text-align:center;margin-top:4%;"">
+      <div style="float:left;width:69%;display:inline-block;text-align:center;"">
         <h2 class="view_screen_title"><br>Select a team you <br> think you can puck with...<br><br></h2><br>
-        <select id="team_select" style="height:25px;width:189px;margin-top:1%;">
+        <select id="team_select" style="height:25px;width:189px;margin-bottom:0.5em;">
           <option value="null"><pre>Please select a team</pre></option>
           <option value="RED">RED TEAM</option>
           <option value="BLUE">BLUE TEAM</option>
@@ -316,7 +338,7 @@
         </select>
         <a onclick="javascript:waiting_view();" class="textured_button"> ONLINE PLAY </a><br>
         <a onclick="javascript:resetForSolo();" class="textured_button"> SOLO PLAY </a><br>
-        <!-- a onclick="javaascript:menu_view()" class="textured_button"> SETTINGS </a -->
+        <a onclick="javascript:instructions_view_home()" class="textured_button"> INFO </a>
         <div class="footer">
           © team "Team" 2017
           <a href="https://github.com/kadengriffith/eecs448-project3" target="new" style="float:right;margin-right:20px;text-decoration:none;color:#cdd;">GitHub</a>
@@ -359,10 +381,10 @@
   </div>
   <!-- This is the HUD -->
   <div class="view_screen" style="display:none;">
-    <!--<div style="display:block;color:#333;position:fixed;padding:0.5em;">Use 'esc' to pause.</div> -->
+    <div style="display:block;color:#333;position:fixed;padding:0.5em;">Use 'esc' to view menu.</div>
     <div class="wrapper">
       <div class="scoreTitle">
-        <div id="player_scoreDisplay" style="float:left;width:99px;text-align:center;"> <!-- Leave Blank See main.js --> </div>
+        <div id="player_scoreDisplay" style="display:inline-block;float:left;width:99px;padding-top:2px;text-align:center;font-size:17px;"> <!-- Leave Blank See main.js --> </div>
         <div style="display:inline-block;width:99px;text-align:center;color:#333;font-size:17px;"> OPPONENT </div>
       </div>
       <div class="scorePoints">
@@ -385,11 +407,11 @@
   <div class="view_screen" style="display:none;cursor:default;">
     <div class="wrapper">
       <h1 class="view_screen_title"> INSTRUCTIONS </h1><br>
-      <div class="instruction"><h3 style="padding:0;line-height:25px;">Controls:</h3><br> W, A, S, D to move. </div>
+      <div class="instruction"><h3 style="padding:0;line-height:25px;">Controls:</h3></div>
+      <div class="instruction"> W, A, S, D to move. </div>
       <div class="instruction"> SPACE to hit. </div>
-      <div class="instruction"> ESC to pause/resume. </div>
-      <div class="instruction"> P to place the puck back at center. </div>
-      <br><br>
+      <div class="instruction"> ESC to view menu. </div>
+      <div class="instruction" style="padding-bottom:0.5em;"> P to place the puck back at center. </div>
       <a onclick="javascript:menu_view();" class="textured_button"> BACK </a>
     </div>
   </div>
@@ -406,9 +428,20 @@
       <h1 class="view_screen_title"> Waiting for opponent... </h1>
     </div>
   </div>
+  <!-- This is the in-menu intructions -->
+  <div class="view_screen" style="display:none;cursor:default;">
+    <div class="wrapper">
+      <h1 class="view_screen_title"> INSTRUCTIONS </h1><br>
+      <div class="instruction"><h3 style="padding:0;line-height:25px;">Controls:</h3></div>
+      <div class="instruction"> W, A, S, D to move. </div>
+      <div class="instruction"> P to place the puck back at center. </div>
+      <div class="instruction"> SPACE to hit. </div>
+      <div class="instruction" style="margin-bottom:0.5em;"> ESC to view menu. </div>
+      <a onclick="javascript:home_view();" class="textured_button"> BACK </a>
+    </div>
+  </div>
   <!-- This is the game -->
   <canvas id="view_GAME"></canvas>
-  <script src="src/onlineBuffer.js" type="text/javascript"></script>
   <script src="src/babylon.custom.js" type="text/javascript"></script>
   <script src="src/cannon.js" type="text/javascript"></script>
   <script src="src/user_interaction.js" type="text/javascript"></script>
