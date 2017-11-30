@@ -2,12 +2,25 @@
 // filename    : loading.js
 // description : a simple DOM image preloader
 /*
-for server: loadTextures = true; LoadSounds = true; enableAi = false;
-for offline mode: loadTextures = false; LoadSounds = false; enableAi = true;
+for server: online(true);
+for offline mode: online(false);
 */
-let loadTextures = true; // Only true when server-side
-let loadSounds = true; // Only true when server-side
-let enableAi = false; // True for single play
+let loadTextures;
+let loadSounds;
+let enableAi;
+function online(bool) {
+  if(bool) {
+    loadTextures = true;
+    loadSounds = true;
+    enableAi = false;
+  }else {
+    loadTextures = false;
+    loadSounds = false;
+    enableAi = true;
+  }
+}
+
+online(true); // Adjust modes here
 
 if(loadTextures) {
   if(!enableAi) {

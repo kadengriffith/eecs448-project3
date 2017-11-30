@@ -11,6 +11,7 @@ let enableTime = true;
 let reloadOnTimeEnd = false; // After time length reload the window
 let gravityConst = -9.81; /* -9.81 */
 let selfDestruct = false;
+let stamina = 100;
 // Time - Match length >= 1
 let minutes = 5; // See time.js
 document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
@@ -199,16 +200,20 @@ function runGame() {
         dropPuck("CENTER");
       }
       if (key_ESC) {
-        menu_view(); // Pause the game
+        menu_view(); // Needs fixed for multiplayer
         if(enableAi) {
           paused = true;
           Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
         }
       }
-      if (key_SPACE) {
-        player_speed = 0.33;
+      if (key_SPACE && stamina > 0) {
+          stamina--;
+          player_speed = 0.5;
       } else {
         player_speed = 0.22;
+        if(stamina < 101) {
+          stamina++;
+        }
       }
       //prevent player1 from going to places that cause problems
       if(PlayerOnBlueSide()) {
