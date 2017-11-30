@@ -22,8 +22,8 @@ document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
 let game = document.getElementById('view_GAME');
 let engine = new BABYLON.Engine(game, true);
 // @END CONTEXT & ENGINE
-runGame();
-function runGame() {
+//runGame();
+//function runGame() {
   //SOCKET.IO
   if(!enableAi) {
    var socket = io.connect();
@@ -300,7 +300,7 @@ function runGame() {
     }
     // Display to the screen ~60fps
   });
-}
+//}
 // @END UPDATE LOOP
 //########################
 //  G A M E   E N D  :(
@@ -358,13 +358,15 @@ function setAi(bool) {
 }
 
 function resetForSolo() {
-  if(document.getElementById('team_select').value === "null") {
+  /*if(document.getElementById('team_select').value === "null") {
     alert('Please choose a team to start a game.');
     home_view();
   }else {
     setAi(true);
     selfDestruct = true;
-  }
+  }*/
+  enableAi = true;
+  game_view();
 }
 
 function setPaused(bool) {
