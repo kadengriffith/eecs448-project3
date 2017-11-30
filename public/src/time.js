@@ -1,10 +1,12 @@
 // filename    : time.js
 // description : Timeline helper functions; Scoring
-// last update : 10 23 2017
-var socket = io.connect();
-socket.on('connect', function() {
-  console.log("Connected time.js");
-});
+// last update : 11 27 2017
+if(!enableAi) {
+  var socket = io.connect();
+  socket.on('connect', function() {
+    console.log("Connected time.js");
+  });
+}
 let game_seconds = 0;
 let seconds = 0;
 let paused = true;

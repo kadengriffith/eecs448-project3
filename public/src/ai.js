@@ -1,11 +1,12 @@
 // filename    : ai.js
 // description : Artificial Intelligence helper functions
-// last update : 10 25 2017
-var socket = io.connect();
-socket.on('connect', function() {
-  console.log("Connected ai.js");
-});
-
+// last update : 11 27 2017
+if(!enableAi) {
+  var socket = io.connect();
+  socket.on('connect', function() {
+    console.log("Connected ai.js");
+  });
+}
 /**
  * Moves ai towards its starting position
  */

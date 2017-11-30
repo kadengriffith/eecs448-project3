@@ -12,10 +12,10 @@ let player_height = 1;
 let player_diameter = 5.5;
 let player_yoff = player_height / 2;
 let player_polygons = 50;
-let player_speed = 0.33;
-let ai_speed = 0.33;
-let player_mass = 2800;
-let player_friction = 0.002;
+let player_speed = 0.22;
+let ai_speed = 0.22;
+let player_mass = 2600;
+let player_friction = 0.008;
 let player_restitution = 0;
 // Puck
 let puck_height = 0.3;
@@ -24,7 +24,7 @@ let puck_yoff = puck_height / 2;
 let puck_polygons = 50;
 let puck_mass = 6.33;
 let puck_friction = 0;
-let puck_restitution = 1.0;
+let puck_restitution = 0.95;
 // Ground
 let ground_length = 80;
 let ground_restitution = 0;

@@ -1,11 +1,13 @@
 // filename    : user_interaction.js
 // description : Definitions and helper methods
-// last update : 10 20 2017
+// last update : 11 27 2017
 // var socket = io.connect('http://localhost:3000');
-var socket = io.connect();
-socket.on('connect', function() {
-  console.log("Connected user_interaction.js");
-});
+if(!enableAi) {
+  var socket = io.connect();
+  socket.on('connect', function() {
+    console.log("Connected user_interaction.js");
+  });
+}
 // Keys to check in-game
 let key_W = false;
 let key_A = false;
