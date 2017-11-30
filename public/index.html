@@ -328,7 +328,7 @@
         <div class="gameTitle" style="text-shadow:0px 0px 20px #2980b9;">!</div>
       </div>
       <!-- This is the landing page LEFT -->
-      <div style="float:left;width:69%;display:inline-block;text-align:center;"">
+      <div style="float:left;width:95%;display:inline-block;text-align:center;"">
         <h2 class="view_screen_title"><br>Select a team you <br> think you can puck with...<br><br></h2><br>
         <select id="team_select" style="height:25px;width:189px;margin-bottom:0.5em;">
           <option value="null"><pre>Please select a team</pre></option>
@@ -342,8 +342,11 @@
         <a onclick="javascript:instructions_view_home()" class="textured_button"> INFO </a>
         <div class="footer">
           © team "Team" 2017
-          <a href="https://github.com/kadengriffith/eecs448-project3" target="new" style="float:right;margin-right:20px;text-decoration:none;color:#cdd;">GitHub</a>
         </div>
+      </div>
+      <div style="display:inline-block;width:5%;float:right;margin-top:8%;">
+        <a onclick="javascript:testSuite();" target="new" style="float:right;margin-right:4px;text-decoration:none;color:#cdd;margin-bottom:0.5em;">Test Suite</a>
+        <a href="https://github.com/kadengriffith/eecs448-project3" target="new" style="float:right;margin-right:10px;text-decoration:none;color:#cdd;">GitHub</a>
       </div>
       <!-- This is the landing page RIGHT -->
       <!--<div class="leaderboard">
@@ -383,6 +386,7 @@
   <!-- This is the HUD -->
   <div class="view_screen" style="display:none;">
     <div style="display:block;color:#333;position:fixed;padding:0.5em;">Use 'esc' to view menu.</div>
+    <div style="display:inline-block;float:right;margin-right:38px;"> Boost: <div class="stamina" style="display:inline-block;width:20px;"> 100 </div></div>
     <div class="wrapper">
       <div class="scoreTitle">
         <div id="player_scoreDisplay" style="display:inline-block;float:left;width:99px;padding-top:2px;text-align:center;font-size:17px;"> <!-- Leave Blank See main.js --> </div>

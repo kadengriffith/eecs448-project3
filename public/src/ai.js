@@ -30,9 +30,9 @@ function AIReturn() { //sends ai back to starting position
 
 function AIFollowPuckX() { //sets the ai's x coord to the puck's x coord
   if(AI.position.x < Puck.position.x - .2) {
-    AI.position.x += ai_speed * 1.2;
+    AI.position.x += ai_speed;
   } else if(AI.position.x > Puck.position.x + .2){
-    AI.position.x -= ai_speed * 1.2;
+    AI.position.x -= ai_speed;
   }
 }
 

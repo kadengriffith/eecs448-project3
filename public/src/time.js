@@ -66,4 +66,9 @@ function startSeconds() {
 function getScore() {
   document.getElementsByClassName("score")[0].innerHTML = score_red;
   document.getElementsByClassName("score")[1].innerHTML = score_ai;
+  if(stamina == -1) {
+    document.getElementsByClassName("stamina")[0].innerHTML = "0";
+  }else {
+    document.getElementsByClassName("stamina")[0].innerHTML = stamina;
+  }
 }

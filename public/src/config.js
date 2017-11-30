@@ -14,7 +14,7 @@ let initialLoad = true; // Unless of course you know this variable name...
 function online(bool) {
   if(bool && initialLoad) {
     loadTextures = true;
-    loadSounds = true;
+    loadSounds = false;
     enableAi = false;
     initialLoad = false;
   }else {

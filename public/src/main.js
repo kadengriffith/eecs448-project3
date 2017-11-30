@@ -22,7 +22,8 @@ document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
 let game = document.getElementById('view_GAME');
 let engine = new BABYLON.Engine(game, true);
 // @END CONTEXT & ENGINE
-
+runGame();
+function runGame() {
   //SOCKET.IO
   if(!enableAi) {
     var socket = io.connect();
@@ -207,12 +208,12 @@ let engine = new BABYLON.Engine(game, true);
           Puck.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0, 0, 0)); // Stop puck
         }
       }
-      if (key_SPACE && stamina > 0) {
+      if (key_SPACE && stamina > -1) {
           stamina--;
-          player_speed = 0.5;
+          player_speed = 0.4;
       } else {
         player_speed = 0.22;
-        if(stamina < 101) {
+        if(stamina < 100) {
           stamina++;
         }
       }
@@ -243,11 +244,11 @@ let engine = new BABYLON.Engine(game, true);
           if(PuckOnBlueSide()) { //if the puck is on the blue side
             if(Puck.position.z < AI.position.z) { //if the puck is behind the ai
               if(Puck.position.x < 0) { //if the puck is on one side of the arena
-                AI.position.x -= ai_speed * 1.2;
+                AI.position.x -= ai_speed;
              } else {
-                AI.position.x += ai_speed * 1.2;
+                AI.position.x += ai_speed;
               }
-              AI.position.z -= ai_speed * 1.2;
+              AI.position.z -= ai_speed;
             } else {
               AI.position.z += ai_speed;
             }
@@ -262,6 +263,7 @@ let engine = new BABYLON.Engine(game, true);
         AI.position.z = adjustedZ;
       }
     }else {
+      air();
       // Enter camera sequence
       if(game_seconds > 18 && game_seconds <= 36) {
         scene.activeCamera = Camera3;
@@ -312,7 +314,7 @@ let engine = new BABYLON.Engine(game, true);
     // Display to the screen ~60fps
     scene.render();
   });
-
+}
 // @END UPDATE LOOP
 //########################
 //  G A M E   E N D  :(
@@ -388,8 +390,13 @@ if(!enableAi) {
 }
 
 function resetForSolo() {
-  setAi(true);
-  selfDestruct = true;
+  if(document.getElementById('team_select').value === "null") {
+    alert('Please choose a team to start a game.');
+    home_view();
+  }else {
+    setAi(true);
+    selfDestruct = true;
+  }
 }
 
 function setPaused(bool) {
