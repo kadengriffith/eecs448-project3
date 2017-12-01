@@ -12,7 +12,6 @@ let reloadOnTimeEnd = false; // After time length reload the window
 let gravityConst = -9.81; /* -9.81 */
 let selfDestruct = false;
 let stamina = 100;
-let loaded = true;
 let scene;
 // Time - Match length >= 1
 let minutes = 5; // See time.js
@@ -111,6 +110,7 @@ let engine = new BABYLON.Engine(game, true);
         puckSound.play();
       });
     }
+    loaded = true;
     // End of createScene function
     return scene;
   };
