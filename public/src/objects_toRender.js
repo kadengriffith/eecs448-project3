@@ -6,7 +6,7 @@ let Puck, Player1, AI;
 let _color; // Used to load textures
 let S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15, S16, Ground, /* Ground2, */ Top;
 let Light;
-let Camera1, Camera2, Camera3, Camera4, Camera5;
+let Camera1, Camera2, Camera3, Camera4, Camera5, Camera6;
 // Player
 let player_height = 1;
 let player_diameter = 5.5;
@@ -276,6 +276,11 @@ function loadGameObjects(scene) {
   // This creates and positions a camera for the menu
   Camera5 = new BABYLON.ArcRotateCamera("ArcRotateCamera", Math.PI / 3, Math.PI / 3, 90, new BABYLON.Vector3(0, 0, 0), scene);
   Camera5.lockedTarget = new BABYLON.Vector3(0, 0, 0);
+  Camera6 = new BABYLON.ArcRotateCamera("ArcRotateCamera", 0, 0, 100, new BABYLON.Vector3(0, 0, 0), scene);
+  Camera6.lockedTarget = new BABYLON.Vector3(0, 0, 0);
+  Camera6.applyGravity = true;
+  Camera6.checkCollisions = true;
+  Camera6.lockedTarget = Puck;
   // Setting game camera
   scene.activeCamera = Camera2;
 }

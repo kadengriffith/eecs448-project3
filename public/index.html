@@ -213,6 +213,11 @@
       color:#f4f4f4;
       font-family:'Shadows Into Light', cursive;
     }
+    #testSuite {
+      cursor:default;
+      transition: 0.5s;
+      overflow-y: scroll;
+    }
   </style>
   <!-- Preload -->
   <script>
@@ -344,42 +349,9 @@
         </div>
       </div>
       <div style="display:inline-block;width:5%;float:right;margin-top:8%;">
-        <a onclick="javascript:testSuite();" target="new" style="float:right;margin-right:4px;text-decoration:none;color:#cdd;margin-bottom:0.5em;">Test Suite</a>
+        <a onclick="javascript:testSuite();" style="cursor:pointer;float:right;margin-right:4px;text-decoration:none;color:#cdd;margin-bottom:0.5em;">Test Suite</a>
         <a href="https://github.com/kadengriffith/eecs448-project3" target="new" style="float:right;margin-right:10px;text-decoration:none;color:#cdd;">GitHub</a>
       </div>
-      <!-- This is the landing page RIGHT -->
-      <!--<div class="leaderboard">
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #2980b9;">L</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #e74c3c;">E</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #f1c40f;">A</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #27ae60;">D</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #2980b9;">E</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #e74c3c;">R</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #f1c40f;">B</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #27ae60;">O</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #2980b9;">A</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #e74c3c;">R</div>
-        <div class="leaderboardTitle" style="text-shadow:0px 0px 20px #f1c40f;">D</div>
-	<?php
-	  $leaderboard = new mysqli('mysql.eecs.ku.edu', 'mtaylor', 'P@$$word123', 'mtaylor');
-	  if($leaderboard->connect_errno) {
-	    printf("Connetion failed: %s\n", $leaderboard->connect_error);
-	    exit();
-	  }
-	  $sort = "SELECT * FROM Leaderboard ORDER BY wins DESC";
-	  $result = $leaderboard->query($sort);
-	  while($row = $result->fetch_assoc()) {
-	    echo "<div>" . $row["color"] . ": " . $row["wins"];
-
-	    if($row["wins"] == 1) {
-	      echo " win</div>";
-	    } else {
-	      echo " wins</div>";
-	    }
-          }
-	  $leaderboard->close();
-	?>
-      </div>-->
     </div>
   </div>
   <!-- This is the HUD -->
@@ -444,6 +416,7 @@
       <a onclick="javascript:home_view();" class="textured_button"> BACK </a>
     </div>
   </div>
+  <div id="testSuite" style="display:block;height:0;letter-spacing:2px;position:fixed;background-color:#fff;bottom:0;left:0;width:100%;display:none;z-index:99;"></div>
   <!-- This is the game -->
   <canvas id="view_GAME"></canvas>
   <script src="src/babylon.custom.js" type="text/javascript"></script>
@@ -454,5 +427,6 @@
   <script src="src/ai.js" type="text/javascript"></script>
   <script src="src/air.js" type="text/javascript"></script>
   <script src="src/main.js" type="text/javascript"></script>
+  <script src="src/testRender.js" type="text/javascript"></script>
 </body>
 </html>

@@ -13,7 +13,6 @@ let gravityConst = -9.81; /* -9.81 */
 let selfDestruct = false;
 let stamina = 100;
 let scene;
-let loaded = true;
 // Time - Match length >= 1
 let minutes = 5; // See time.js
 document.getElementsByClassName('time')[0].innerHTML = minutes + ":00";
