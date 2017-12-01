@@ -12,6 +12,7 @@ let reloadOnTimeEnd = false; // After time length reload the window
 let gravityConst = -9.81; /* -9.81 */
 let selfDestruct = false;
 let stamina = 100;
+let loaded = true;
 let scene;
 // Time - Match length >= 1
 let minutes = 5; // See time.js
@@ -357,15 +358,13 @@ function setAi(bool) {
 }
 
 function resetForSolo() {
-  /*if(document.getElementById('team_select').value === "null") {
+  if(document.getElementById('team_select').value === "null") {
     alert('Please choose a team to start a game.');
     home_view();
   }else {
-    setAi(true);
-    selfDestruct = true;
-  }*/
-  enableAi = true;
-  game_view();
+    enableAi = true;
+    game_view();
+  }
 }
 
 function setPaused(bool) {
