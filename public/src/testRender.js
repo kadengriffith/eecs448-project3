@@ -4,9 +4,16 @@
 function testSuite() {
   scene.dispose();
   engine.dispose();
-  let suiteSuper = document.getElementById('testSuite');
-  suiteSuper.style.height = '33%';
+  let suite = document.getElementById('testSuite');
+  let suiteSuper = document.getElementById('testSuite-txt');
+  let unwantedItems = document.getElementById('LEFT');
+  let unwantedItems2 = document.getElementById('LEFT2');
+  unwantedItems.style.display = 'none';
+  unwantedItems2.style.display = 'none';
+  suite.style.display = 'block';
+  suite.style.height = '33%';
   suiteSuper.style.display = 'block';
+  suiteSuper.style.height = '33%';
   suiteSuper.innerHTML = "#######################<br>";
   suiteSuper.innerHTML += "Testing initiated...<br>";
   suiteSuper.innerHTML += "#######################<br>";
@@ -22,7 +29,12 @@ function testSuite() {
   let _score1 = false;
   let _score2 = false;
   let _goal = false;
-
+  let _air = false;
+  let _color1 = false;
+  let _color2 = false;
+  let _color3 = false;
+  let _color4 = false;
+  //\\
     let testCanvas = game;
     engine = new BABYLON.Engine(testCanvas, true);
     let gravityConst = -9.81;
@@ -33,6 +45,7 @@ function testSuite() {
     let gravityVector = new BABYLON.Vector3(0, gravityConst, 0);
     let physicsPlugin = new BABYLON.CannonJSPlugin();
     loadGameObjects(scene);
+    Light.intensity = 0.2;
     _object = true;
     _material = true;
     scene.enablePhysics(gravityVector, physicsPlugin);
@@ -54,34 +67,79 @@ function testSuite() {
   let ticks = 0;
   engine.runRenderLoop(function () {
     if(ticks === 0) { scene.activeCamera = Camera6; }
-    if(ticks > 100 && ticks < 102) {
+    if(ticks > 0 && ticks < 2) {
       dropPuck("CENTER");
     }
-    if(ticks > 120 && ticks < 140) {
-      Puck.position.x++;
-    }
-    if(ticks > 141 && ticks < 143) {
-      dropPuck("CENTER");
+    if(ticks > 100 && ticks < 120) {
+      AI.position.z++;
+      Player1.position.z--;
     }
     if(ticks > 144 && ticks < 146) {
       score_red++;
     }
-    if(ticks > 147 && ticks < 149) {
+    if(ticks > 146 && ticks < 148) {
       score_ai++;
     }
-    if(ticks > 150 && ticks < 158) {
+    if(ticks > 250 && ticks < 260) {
       Player1.position.x++;
+      AI.position.x++;
     }
-    if(ticks > 161 && ticks < 210) {
+    if(ticks > 261 && ticks < 310) {
       Puck.position.z++;
     }
-    if(ticks > 211 && ticks < 213) {
+    if(ticks > 311 && ticks < 313) {
       dropPuck("CENTER");
     }
-    if(ticks > 1000) {
+    if(ticks > 313 && ticks < 362) {
+      Puck.position.z--;
+    }
+    if(ticks > 362 && ticks < 364) {
+      dropPuck("CENTER");
+    }
+    if(ticks > 365 && ticks < 380) {
+      air();
+    }
+    if(ticks > 380 && ticks < 400) {
+      AI.position.z--;
+      Player1.position.z++;
+      if(ticks < 353) {
+        loadMaterial(Player1, "playerRed", loadTextures, false, [0.5, 0.5, 0.5], scene);
+        loadMaterial(AI, "playerYellow", loadTextures, false, [0.5, 0.5, 0.5], scene);
+        _color1 = true;
+      }
+    }
+    if(ticks > 400 && ticks < 410) {
+      AI.position.x--;
+      Player1.position.x--;
+      if(ticks < 366) {
+        loadMaterial(Player1, "playerGreen", loadTextures, false, [0.5, 0.5, 0.5], scene);
+        loadMaterial(AI, "playerBlue", loadTextures, false, [0.5, 0.5, 0.5], scene);
+        _color2 = true;
+      }
+    }
+    if(ticks > 410 && ticks < 420) {
+      AI.position.z++;
+      Player1.position.z--;
+      if(ticks < 377) {
+        loadMaterial(Player1, "playerBlue", loadTextures, false, [0.5, 0.5, 0.5], scene);
+        loadMaterial(AI, "playerRed", loadTextures, false, [0.5, 0.5, 0.5], scene);
+        _color3 = true;
+      }
+    }
+    if(ticks > 420 && ticks < 430) {
+      loadMaterial(Player1, "playerYellow", loadTextures, false, [0.5, 0.5, 0.5], scene);
+      loadMaterial(AI, "playerGreen", loadTextures, false, [0.5, 0.5, 0.5], scene);
+      _color4 = true;
+    }
+    if(ticks > 430 && ticks < 440) {
+      loadMaterial(Player1, "playerOnLoad", loadTextures, false, [1.0, 1.0, 1.0], scene);
+      loadMaterial(AI, "playerOnLoad", loadTextures, false, [1.0, 1.0, 1.0], scene);
+    }
+
+    if(ticks > 1500) {
       window.location.reload();
     }
-    if(Puck.position.x > 2) {
+    if(AI.position.x > 2) {
       _movement = true;
     }
     if(Puck.position.y > 2) {
@@ -95,6 +153,9 @@ function testSuite() {
     }
     if(Puck.position.z > ground_length / 2) {
       _goal = true;
+    }
+    if(ticks > 362 && ticks < 380 && Puck.position.y > airForce) {
+      _air = true;
     }
     ticks++;
     scene.render();
@@ -151,6 +212,7 @@ function testSuite() {
       }
       suiteSuper.innerHTML += "TEST 5 -- ATTACH IMPOSTOR: " + tstr5;
       suiteSuper.innerHTML += "<br>";
+
       let tstr6;
       if(_sound) {
         tstr6 = "PASSED";
@@ -159,6 +221,7 @@ function testSuite() {
       }
       suiteSuper.innerHTML += "TEST 6 -- ATTACH SOUND: " + tstr6;
       suiteSuper.innerHTML += "<br>";
+
       let tstr7;
       if(_scene) {
         tstr7 = "PASSED";
@@ -167,6 +230,7 @@ function testSuite() {
       }
       suiteSuper.innerHTML += "TEST 7 -- SCENE CREATION: " + tstr7;
       suiteSuper.innerHTML += "<br>";
+
       let tstr8;
       if(_movement) {
         tstr8 = "PASSED";
@@ -175,6 +239,7 @@ function testSuite() {
       }
       suiteSuper.innerHTML += "TEST 8 -- MOVEMENT: " + tstr8;
       suiteSuper.innerHTML += "<br>";
+
       let tstr9;
       if(_sceneBehavior) {
         tstr9 = "PASSED";
@@ -183,6 +248,7 @@ function testSuite() {
       }
       suiteSuper.innerHTML += "TEST 9 -- SCENE BEHAVIOR: " + tstr9;
       suiteSuper.innerHTML += "<br>";
+
       let tstr10;
       if(_score1 && _score2) {
         tstr10 = "PASSED";
@@ -191,6 +257,7 @@ function testSuite() {
       }
       suiteSuper.innerHTML += "TEST 10 -- SCORING: " + tstr10;
       suiteSuper.innerHTML += "<br>";
+
       let tstr11;
       if(_goal) {
         tstr11 = "PASSED";
@@ -198,7 +265,25 @@ function testSuite() {
         tstr11 ="FAIL";
       }
       suiteSuper.innerHTML += "TEST 11 -- GOAL HEIGHT: " + tstr11;
+      suiteSuper.innerHTML += "<br>";
+
+      let tstr12;
+      if(_air) {
+        tstr12 = "PASSED";
+      }else {
+        tstr12 ="FAIL";
+      }
+      suiteSuper.innerHTML += "TEST 12 -- TABLE AIR ENABLE: " + tstr11;
+      suiteSuper.innerHTML += "<br>";
+
+      let tstr13;
+      if(_color1 && _color2 && _color3 && _color4) {
+        tstr13 = "PASSED";
+      }else {
+        tstr13 ="FAIL";
+      }
+      suiteSuper.innerHTML += "TEST 13 -- COLOR: " + tstr11;
       suiteSuper.innerHTML += "<br>#######################<br>";
-    }, 1000);
+    }, 2700);
   }, 5000);
 }

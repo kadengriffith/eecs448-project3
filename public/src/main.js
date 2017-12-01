@@ -194,9 +194,9 @@ let engine = new BABYLON.Engine(game, true);
       }
       if (key_SPACE && stamina > -1) {
           stamina--;
-          player_speed = 0.4;
+          player_speed = 0.5;
       } else {
-        player_speed = 0.22;
+        player_speed = 0.33;
         if(stamina < 100) {
           stamina++;
         }

@@ -10,7 +10,7 @@ if(loadTextures) {
   }
   let total_number_of_images = 26; // This is a manual setting please verify
   let image_count_verification = 0;
-  let loaded = false;
+  var loaded = false;
   function preload(arrayOfImages) {
     console.log("Preload started.");
     $(arrayOfImages).each(function(){
