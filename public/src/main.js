@@ -358,15 +358,13 @@ function setAi(bool) {
 }
 
 function resetForSolo() {
-  /*if(document.getElementById('team_select').value === "null") {
+  if(document.getElementById('team_select').value === "null") {
     alert('Please choose a team to start a game.');
     home_view();
   }else {
-    setAi(true);
-    selfDestruct = true;
-  }*/
-  enableAi = true;
-  game_view();
+    enableAi = true;
+    game_view();
+  }
 }
 
 function setPaused(bool) {
