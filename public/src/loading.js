@@ -11,6 +11,12 @@ if(loadTextures) {
   let total_number_of_images = 26; // This is a manual setting please verify
   let image_count_verification = 0;
   var loaded = false;
+  
+  /**
+   * Retrieves all necessary assets and textures before the game has started to minimize load time. Pulls each texture from server in preparation to be placed where it belongs.
+   *
+   */
+  
   function preload(arrayOfImages) {
     console.log("Preload started.");
     $(arrayOfImages).each(function(){
