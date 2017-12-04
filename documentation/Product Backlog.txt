@@ -65,9 +65,9 @@ List of features and descriptions of exstimated complexity and time required to 
 	users to play against their friends. Time needed to research, design, and
 	implement this feature is about 10 days.
 
-12. Improve AI
+12. Add air physics
 
-	Make the AI more sophisticated. Instead of simply following and returning the puck, 
-	AI will predict the puck's location and aim for the goal as much as possible.
-	Multiple difficulties will be created to determine how aggressive AI behaves.
-	Time needed to complete this feature is about 3 days.
+	Adding a slight upward force below the puck would allow for smoother travel.
+	Furthermore, this would create the illusion that the game is being played on
+	a real air hockey table. The time needed to implement this feature is only
+	about 1 hour.
