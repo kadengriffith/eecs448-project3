@@ -1,6 +1,12 @@
 // filename    : testRender.js
 // description : Testing functions
 // last update : 11 30 2017
+
+/**
+ * Function that controls testing suite. Runs all tests, displays results to screen.
+ * Tests include things like: score increments correctly, strikers moving correctly, textures loading correclty, etc.
+ */
+
 function testSuite() {
   scene.dispose();
   engine.dispose();

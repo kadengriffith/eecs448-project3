@@ -339,15 +339,40 @@ function dropPlayer(str, loc) {
   return;
 }
 
+/**
+ * Sends the puck location and velocities to the server.
+ * @param {float} px x coordinate of puck's position
+ * @param {float} py y coordinate of puck's position
+ * @param {float} pz z coordinate of puck's position
+ * @param {float} vxl linear velocity in the x direction
+ * @param {float} vyl linear velocity in the y direction
+ * @param {float} vzl linear velocity in the z direction
+ * @param {float} vxa angular velocity in the x direction (roll)
+ * @param {float} vya angular velocity in the y direction (pitch)
+ * @param {float} vza angular velocity in the z direction (yaw)
+ */
+
 // Monitor puck
 function sendPuck(px, py, pz, vxl, vyl, vzl, vxa, vya, vza) {
   socket.emit('puckmove', {x: px, y: py, z: pz, lvx: vxl, lvy: vyl, lvz: vzl, avx: vxa, avy: vya, avz: vza});
 }
 
+/**
+ * Sends player location to the server.
+ * @param {float} px x coordinate of the player's position
+ * @param {float} py y coordinate of the player's position
+ * @param {float} pz z coordinate of the player's position
+ */
+
 // Monitor player 1
 function sendPlayer1(px, py, pz) {
   socket.emit('playermove', {x: px, y: py, z: pz});
 }
+
+/**
+ * Setter function that enables AI (single player vs multiplayer game)
+ * @param {bool} bool true if you want single player, false if you want multiplayer
+ */
 
 // Enable solo play
 function setAi(bool) {
@@ -356,6 +381,10 @@ function setAi(bool) {
     return;
   }
 }
+
+/**
+ * Function that is called to begin a single player game. Sets all required variables, checks for errors in user input, starts game.
+ */
 
 function resetForSolo() {
   if(document.getElementById('team_select').value === "null") {
@@ -366,6 +395,11 @@ function resetForSolo() {
     game_view();
   }
 }
+
+/**
+ * Function that controls the pause feature. Displays pause menu when ESCAPE key is pressed
+ * @param {bool} bool true if game is paused, false if not
+ */
 
 function setPaused(bool) {
   paused = bool;

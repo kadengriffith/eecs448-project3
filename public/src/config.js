@@ -11,6 +11,11 @@ let enableAi;
 // Prevents user override in console
 let initialLoad = true; // Unless of course you know this variable name...
 
+/**
+ * Sets variables to load only essential assets for each game. For example: do not load AI code for an online game.
+ *
+ */
+
 function online(bool) {
   if(bool && initialLoad) {
     loadTextures = true;

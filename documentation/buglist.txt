@@ -1,0 +1,18 @@
+Known Bugs (12/04/17):
+
+-Issue with the clock sync between two clients. Usually off by .2 seconds.
+
+-Issue with the puck sometimes unsyncing. This causes players to not be able to actually play.
+
+-Sometimes an issue with the guest client when a goal is scored which causes a render error, and counts 3 or 4 goals on one client, while the host client still increments score correctly.
+
+-Issue with goals not being counted, or being counted to many times. (may be from the above bug)
+
+-Issue with the puck "Floating" when playing multiplay. The puck wont show its floating animation.
+	+The puck seems to work fine in single player.
+
+-Problems with latency. this causes the frames to drop significantly. Seemed to happen after swiching over to Node js.
+
+-Removed the highscores from project 3 after changing over to Node js. For some reason, we were unable to get it to work correctly with Node js.
+
+-Ocasionally, a really hard hit on the puck will cause it to leave the play area. This seems to happen the most in the corners, and when it is launched hard at the ceiling.
