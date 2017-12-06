@@ -16,4 +16,14 @@ Date Accessed: 11/4/2017
 draw.io
 by David Benson
 Link: https://www.draw.io/
-Date Accessed: 11/5/17
+Date Accessed: 11/5/2017
+
+nodejs
+by Node.js Foundation
+Link: https://nodejs.org/en/
+Date Accessed: 11/10/2017
+
+socket.io
+by Guillermo Rauch
+Link: https://socket.io/
+Date Accessed: 11/10/2017
